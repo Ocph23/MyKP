@@ -35,7 +35,7 @@ function AuthServices($http, $state, $rootScope, MessageServices, $q, UserServic
     //var def = $q.defer();
 
     var service = {
-        login: login, register: register, getProfile: getProfile
+        login: login, register: register, getAgentProfile: getAgentProfile
     };
 
 
@@ -79,11 +79,11 @@ function AuthServices($http, $state, $rootScope, MessageServices, $q, UserServic
     }
 
 
-    function getProfile() {
+    function getAgentProfile() {
         var def = $q.defer();
         $http({
             method: 'Get',
-            url: '/account/PetugasProfile',
+            url: '/agent/getuserprofile',
             headers: UserServices.getHeaders()
         }).then(function successCallback(response) {
             def.resolve(response.data);

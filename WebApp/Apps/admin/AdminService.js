@@ -1,7 +1,7 @@
 ﻿
 angular.module("admin.services", [])
-.factory('UserServices', UserServices)
- 
+    .factory('UserServices', UserServices)
+    .factory('AdminService', AdminService)
 
 ;
 
@@ -35,7 +35,7 @@ function UserServices($http, $state,$rootScope) {
         $rootScope.DataUser = {};
         $http({
             method: 'Get',
-            url: '/Account/PetugasProfile'
+            url: '/Agent/PetugasProfile'
         }).then(function (response) {
             $rootScope.DataUser = response.data;
 
@@ -52,5 +52,35 @@ function UserServices($http, $state,$rootScope) {
     }
 }
 
+function AdminService($http, $state, $rootScope,$q) {
+    var service = {};
+    var instance = false;
+    var datas = [];
 
-    ;
+    return {
+        get: get
+    };
+
+    function get() {
+        var deffer = $q.defer();
+        if (!instance) {
+            $http({
+                method: 'Get',
+                url: 'api/Agent'
+            }).then(function (response) {
+                instance = true;
+                response.data.forEach(item => {
+                    datas.push(item);
+                });
+                deffer.resolve(datas);
+            }, function (error) {
+                deffer.reject();
+                alert(error.message);
+            });
+        } else {
+            deffer.resolve(datas);
+        }
+
+        return deffer.promise;
+    }
+}

@@ -36,12 +36,23 @@ using Ocph.DAL;
                set{ 
                       _agentid=value;
                      }
-          } 
+          }
 
-          private int  _id;
+        [DbColumn("UserId")]
+        public string UserId
+        {
+            get { return _userid; }
+            set
+            {
+                _userid = value;
+            }
+        }
+
+        private int  _id;
            private string  _name;
            private int  _agentid;
-      }
+        private string _userid;
+    }
 }
 
 

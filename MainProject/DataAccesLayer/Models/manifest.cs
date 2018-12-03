@@ -90,9 +90,11 @@ using Ocph.DAL;
                set{ 
                       _recieveonport=value;
                      }
-          } 
+          }
 
-          private int  _id;
+        public List<stt> Items { get;  set; }
+
+        private int  _id;
            private DateTime  _createdate;
            private DateTime  _updatedate;
            private int  _number;
