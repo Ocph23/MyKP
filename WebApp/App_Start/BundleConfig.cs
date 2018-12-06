@@ -35,9 +35,9 @@ namespace WebApp
                      "~/apps/admin/AdminRoute.js",
                      "~/apps/admin/AdminService.js",
                      "~/apps/admin/AdminController.js",
-                     "~/apps/Petugas/Petugas.Route.js",
-                     "~/apps/Petugas/Petugas.Service.js",
-                     "~/apps/Petugas/Petugas.Controller.js"
+                     "~/apps/agent/agent.Route.js",
+                     "~/apps/agent/agent.Service.js",
+                     "~/apps/agent/agent.Controller.js"
 
 
 

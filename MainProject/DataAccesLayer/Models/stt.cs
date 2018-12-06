@@ -81,9 +81,12 @@ using Ocph.DAL;
                set{ 
                       _manifestid=value;
                      }
-          } 
+          }
 
-          private int  _id;
+        [DbColumn("CityId")]
+        public int CityId { get; set; }
+
+        private int  _id;
            private string  _stt;
            private string  _shiper;
            private string  _reciever;

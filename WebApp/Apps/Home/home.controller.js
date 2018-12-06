@@ -1,5 +1,6 @@
 angular.module("home.controllers", [])
     .controller('LoginController', LoginController)
+  
     .controller('RegisterController', RegisterController)
     ;
 

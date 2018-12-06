@@ -22,9 +22,35 @@ angular.module('admin.routes', [])
                 controller: 'AdminAgentController'
             })
 
+            .state('usermanage', {
+                url: '/usermanage',
+                parent: 'admin',
+                params: {
+                    data: null
+                },
+                templateUrl: '/apps/admin/templates/manageuser.html',
+                controller: 'AdminUserManageController'
+            })
 
+            .state('cities', {
+                url: '/cities',
+                parent: 'admin',
+                params: {
+                    data: null
+                },
+                templateUrl: '/apps/admin/templates/city.html',
+                controller: 'AdminCityManageController'
+            })
+
+            .state('prices', {
+                url: '/prices',
+                parent: 'admin',
+                params: {
+                    data: null
+                },
+                templateUrl: '/apps/admin/templates/prices.html',
+                controller: 'AdminPriceManageController'
+            })
             ;
-           
-
     })
    ;

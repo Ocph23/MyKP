@@ -4,7 +4,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="navbar-toggler-icon"></span>
-                </button> <a class="navbar-brand">Daftar Agent</a>
+                </button> <a class="navbar-brand">Daftar Tarif {{Agent.Name}}</a>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="navbar-nav ml-md-auto">
                         <li class="nav-item active">
@@ -20,27 +20,25 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Kode</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Contact Person</th>
-                        <th scope="col">Telp</th>
-                        <th scope="col">Handphone</th>
+                        <th scope="col">City Code</th>
+                        <th scope="col">City Name</th>
+                        <th scope="col">PortType</th>
+                        <th scope="col">Price</th>
+
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="item in Datas">
                         <th scope="row">{{$index+1}}</th>
-                        <td>{{item.Code}}</td>
-                        <td>{{item.Name}}</td>
-                        <td>{{item.ContactPerson}}</td>
-                        <td>{{item.Telepon}}</td>
-                        <td>{{item.Handphone}}</td>
+                        <td>{{item.City.Kode}}</td>
+                        <td>{{item.City.Name}}</td>
+                        <td>{{item.PortType}}</td>
+                        <td>{{item.PriceValue}}</td>
+
                         <td>
                             <a ng-click="SelectedItem(item)" data-toggle="modal" data-target="#exampleModalCenter" href=""><i class="fas fa-trash text-info"></i></a>
-                            <a ng-click="EditItem(item)" data-target="#modal-container-825517" role="button" data-toggle="modal" href=""><i class="fas fa-edit text-warning"></i></a>
-                            <a ui-sref="usermanage({data:item})"><i class="fas fa-users"></i></a>
-                            <a ui-sref="prices({data:item})"><i class="fas fa-users"></i></a>
+                            <a ng-click="EditItem(item)" data-target="#modal-container-825517" role="button" data-toggle="modal"><i class="fas fa-edit text-warning"></i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -56,66 +54,35 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="myModalLabel">
-                        Modal title
+                        Add New Price
                     </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form role="form">
+                    <form role="form" ng-submit="SaveAgent(model)">
                         <div class="form-group">
                             <label>
-                                Kode Agent
+                                Destination
                             </label>
-                            <input ng-model="model.Code" type="text" class="form-control" />
+                            <select  class="form-control" ng-options="item as item.Name for item in Cities track by item.id" ng-model="CitySelected"></select>
                         </div>
                         <div class="form-group">
                             <label>
-                                Nama Perusahaan
+                                PortType
                             </label>
-                            <input ng-model="model.Name" type="text" class="form-control" />
+                            <select  class="form-control" ng-options="item as item for item in Ports track by item.id" ng-model="PortType"></select>
                         </div>
                         <div class="form-group">
                             <label>
-                                NPWP
+                                Price
                             </label>
-                            <input ng-model="model.NPWP" type="text" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label>
-                                Contact Person
-                            </label>
-                            <input ng-model="model.ContactPerson" type="text" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label>
-                                Telepon
-                            </label>
-                            <input ng-model="model.Telepon" type="text" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label>
-                                Handphone
-                            </label>
-                            <div class="row">
-                                <div class="col">
-                                    <input type="text" ng-model="model.Handphone" class="form-control" placeholder="Handpone 1">
-                                </div>
-                                <div class="col">
-                                    <input type="text" ng-model="model.Handphone2" class="form-control" placeholder="Handphone 2">
-                                </div>
-                            </div>
+                            <input ng-model="model.PriceValue" type="number" class="form-control" required />
                         </div>
 
-                        <div class="form-group">
-                            <label>
-                                Alamat
-                            </label>
-                            <textarea ng-model="model.Address" type="text" class="form-control"></textarea>
-                        </div>
                         <div class="modal-footer">
-                            <button ng-click="SaveAgent(model)" type="button" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary">
                                 Save changes
                             </button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -144,7 +111,7 @@
                 </button>
             </div>
             <div class="modal-body">
-               Yakin Hapus Data ?
+                Yakin Hapus Data ?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

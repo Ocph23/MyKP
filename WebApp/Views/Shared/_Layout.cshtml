@@ -9,14 +9,12 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-    <link href="~/Content/ui-bootstrap-csp.css" rel="stylesheet" />
     <link href="~/Content/nprogress.css" rel="stylesheet" />
 </head>
 <body ng-app="app">
     <script type="text/ng-template" id="alert.html">
         <div ng-transclude></div>
     </script>
-    <div class="container" uib-alert ng-repeat="alert in alerts" template-url="alert.html" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
     @RenderBody()
 
 
@@ -24,7 +22,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/angular")
-    <script src="~/Scripts/angular-ui/ui-bootstrap.js"></script>
     <script src="~/Scripts/nprogress.js"></script>
     @RenderSection("scripts", required: false)
 </body>

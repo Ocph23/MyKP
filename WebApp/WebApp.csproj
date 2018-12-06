@@ -200,9 +200,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AgentController.cs" />
+    <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\ClientAccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PriceController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -219,6 +221,11 @@
     <Content Include="Apps\admin\AdminRoute.js" />
     <Content Include="Apps\admin\AdminService.js" />
     <Content Include="Apps\admin\index.html" />
+    <Content Include="Apps\admin\Templates\city.html" />
+    <Content Include="Apps\admin\Templates\manageuser.html" />
+    <Content Include="Apps\admin\Templates\prices.html" />
+    <Content Include="Apps\agent\templates\createmanifest.html" />
+    <Content Include="Apps\agent\templates\manifests.html" />
     <Content Include="Apps\app.config.js" />
     <Content Include="Apps\app.js" />
     <Content Include="Apps\Home\home.controller.js" />
@@ -226,9 +233,10 @@
     <Content Include="Apps\Home\home.Service.js" />
     <Content Include="Apps\Home\login.html" />
     <Content Include="Apps\Home\register.html" />
-    <Content Include="Apps\petugas\petugas.controller.js" />
-    <Content Include="Apps\petugas\petugas.route.js" />
-    <Content Include="Apps\petugas\petugas.Service.js" />
+    <Content Include="Apps\agent\index.html" />
+    <Content Include="Apps\agent\agent.controller.js" />
+    <Content Include="Apps\agent\agent.route.js" />
+    <Content Include="Apps\agent\agent.Service.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -243,6 +251,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\GettyImages-859526476.jpg" />
+    <Content Include="Memo.txt" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
@@ -351,6 +360,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Apps\Home\templates\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

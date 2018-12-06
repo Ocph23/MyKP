@@ -1,0 +1,2 @@
+﻿Kekurangan
+1. Belum menghandle cara menonaktifkan Agent

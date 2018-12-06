@@ -38,34 +38,9 @@ using Ocph.DAL;
                      }
           } 
 
-          [DbColumn("ShiperAddress")] 
-          public string ShiperAddress 
-          { 
-               get{return _shiperaddress;} 
-               set{ 
-                      _shiperaddress=value;
-                     }
-          } 
+        
 
-          [DbColumn("RecieverAddress")] 
-          public string RecieverAddress 
-          { 
-               get{return _recieveraddress;} 
-               set{ 
-                      _recieveraddress=value;
-                     }
-          } 
-
-          [DbColumn("DestinationId")] 
-          public int DestinationId 
-          { 
-               get{return _destinationid;} 
-               set{ 
-                      _destinationid=value;
-                     }
-          } 
-
-          private int  _id;
+        private int  _id;
            private string  _name;
            private string  _code;
            private string  _shiperaddress;

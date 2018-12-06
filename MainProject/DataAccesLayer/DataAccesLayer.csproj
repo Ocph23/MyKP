@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Models\agent.cs" />
     <Compile Include="Models\agentadmin.cs" />
     <Compile Include="Models\city.cs" />
@@ -68,7 +69,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWork\UOWAgent.cs" />
     <Compile Include="UnitOfWork\UOWAgentProfile.cs" />
+    <Compile Include="UnitOfWork\UOWCity.cs" />
     <Compile Include="UnitOfWork\UOWManifest.cs" />
+    <Compile Include="UnitOfWork\UOWPrice.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

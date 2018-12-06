@@ -1,0 +1,217 @@
+﻿<div class="row" style="padding:15px" ng-init="Saved=false">
+    <div class="card w-100">
+        <div class="card-header">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="navbar-toggler-icon"></span>
+                </button> <a class="navbar-brand">Manifest Baru</a>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="navbar-nav ml-md-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="" ng-click="Saved=true">
+                                <i ng-if="Saved" class="fas fa-check-circle fa-2x text-success"></i>
+                                <i  ng-if="!Saved" class="fas fa-check-circle fa-2x text-dark"></i>
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-4 col-form-label">Nomor Manifest</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="inputPassword" placeholder="Nomor Manifest">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">PortType</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" placeholder="PortType">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Detail Information</label>
+                        <div class="col-sm-8">
+                            <textarea type="text" style="height:100px" class="form-control " placeholder="ex: Via SMU 12323232.232.888 / etc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5">
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-4 col-form-label">Package Count</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="inputPassword" placeholder="Pcs">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Sended Date</label>
+                        <div class="col-sm-8">
+                            <input type="text" readonly class="form-control"  ng-model="model.SendedDate" placeholder="DateTime">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Create Date</label>
+                        <div class="col-sm-8">
+                            <input type="text" readonly class="form-control" ng-model="model.CreateDate" placeholder="DateTime">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Admin</label>
+                        <div class="col-sm-8">
+                            <input type="text" ng-model="model.UserName" readonly class="form-control" placeholder="Admin Name">
+                        </div>
+                    </div>
+
+
+                </div>
+               
+
+            </div>
+           
+
+            <div class="card" ng-show="Saved">
+
+                <div class="card-body">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Kode</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Contact Person</th>
+                                <th scope="col">Telp</th>
+                                <th scope="col">Handphone</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in Datas">
+                                <th scope="row">{{$index+1}}</th>
+                                <td>{{item.Code}}</td>
+                                <td>{{item.Name}}</td>
+                                <td>{{item.ContactPerson}}</td>
+                                <td>{{item.Telepon}}</td>
+                                <td>{{item.Handphone}}</td>
+                                <td>
+                                    <a ng-click="SelectedItem(item)" data-toggle="modal" data-target="#exampleModalCenter" href=""><i class="fas fa-trash text-info"></i></a>
+                                    <a ng-click="EditItem(item)" data-target="#modal-container-825517" role="button" data-toggle="modal" href=""><i class="fas fa-edit text-warning"></i></a>
+                                    <a ui-sref="usermanage({data:item})"><i class="fas fa-users"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-header">
+                    <a data-target="#modal-container-825517" role="button" data-toggle="modal" class="nav-link" href="" ng-click="Saved=true">
+                        <i  class="fas fa-plus-circle  fa-2x text-success"></i>
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-12">
+    <div class="modal fade" id="modal-container-825517" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">
+                       Add New Item
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form role="form" ng-submit="AddNewItem(data)">
+                        <div class="form-group">
+                            <label>
+                               STT
+                            </label>
+                            <input ng-model="data.STT" type="text" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Shiper
+                            </label>
+                            <input ng-model="data.Shiper" type="text" class="form-control" placeholder="Shiper Name" required />
+                            <textarea ng-model="data.ShiperAddress" type="text" class="form-control" placeholder="Shiper Address" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Reciever
+                            </label>
+                            <input ng-model="data.Reciever" type="text" class="form-control" placeholder="Reciever Name" required/>
+                            <textarea ng-model="data.RecieverAddress" type="text" class="form-control" placeholder="Reciever Address" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                               Destination
+                            </label>
+                            <input ng-model="data.City" type="text" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Package
+                            </label>
+                            <div class="row">
+                                <div class="col">
+                                    <input type="text" ng-model="model.Pcs" class="form-control" placeholder="Count" required>
+                                </div>
+                                <div class="col">
+                                    <input type="text" ng-model="model.Weight" class="form-control" placeholder="Total Weight" required>
+                                </div>
+                            </div>
+                        </div>
+
+                      
+                        <div class="modal-footer">
+                            <button  type="submit" class="btn btn-primary">
+                                Save changes
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Delete Agent</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Yakin Hapus Data ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button ng-click="delete()" data-dismiss="modal" type="button" class="btn btn-danger">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>

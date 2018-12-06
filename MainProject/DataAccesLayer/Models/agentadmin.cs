@@ -48,6 +48,21 @@ using Ocph.DAL;
             }
         }
 
+        [DbColumn("Email")]
+        public string Email { get; set; }
+
+        [DbColumn("Status")]
+        public bool Status { get; set; }
+
+        [DbColumn("Address")]
+        public string Address { get;  set; }
+
+        [DbColumn("Telepon")]
+        public string Telepon { get;  set; }
+
+        [DbColumn("Photo")]
+        public byte[] Photo { get;  set; }
+
         private int  _id;
            private string  _name;
            private int  _agentid;

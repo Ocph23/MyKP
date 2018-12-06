@@ -54,9 +54,11 @@ using Ocph.DAL;
                set{ 
                       _porttype=value;
                      }
-          } 
+          }
 
-          private int  _id;
+        public city City { get; set; }
+
+        private int  _id;
            private int  _agentid;
            private int  _cityid;
            private double  _pricevalue;

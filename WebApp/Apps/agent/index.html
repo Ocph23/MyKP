@@ -4,7 +4,7 @@
         <ul class="sidebar-nav">
             <li class="sidebar-brand" style="background-color:#077fa0">
                 <a href="#">
-                    Trireksa
+                    {{Agent.Name}}
                 </a>
             </li>
             <li>
@@ -12,15 +12,15 @@
             </li>
             <li>
                 <a href="" role="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                    Agent
+                    Manifest
                 </a>
                 <div style="padding-left:15px" class="collapse" id="collapseExample">
-                    <div> <a ui-sref="adminagent">Daftar</a></div>
-                    <div> <a ui-sref="adminagent" href="">Cari</a></div>
+                    <div> <a ui-sref="createmanifest">Create</a></div>
+                    <div> <a ui-sref="manifests">Daftar</a></div>
                 </div>
             </li>
             <li>
-                <a ui-sref="cities">Cities</a>
+                <a href="#">About</a>
             </li>
             <li>
                 <a href="#">Services</a>
@@ -38,7 +38,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-md-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown">User</a>
+                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown">{{User.Name}}</a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <a class="dropdown-item" href="#">Something else here</a>
                             <div class="dropdown-divider">
@@ -53,7 +53,7 @@
         </div>
     </div>
     <!-- /#page-content-wrapper -->
-    
+
 </div>
 <!-- /#wrapper -->
 <!-- Bootstrap core JavaScript -->
