@@ -8,7 +8,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="navbar-nav ml-md-auto">
                         <li class="nav-item active">
-                            <a data-target="#modal-container-825517" role="button" data-toggle="modal" class="nav-link" href="" ng-click="model=null"><i class="fas fa-plus-circle fa-2x text-success"></i> <span class="sr-only">(current)</span></a>
+                            <a data-target="#modal-container-825517" role="button" data-toggle="modal" class="nav-link" href="" ng-click="model=null"><i class="fas fa-plus-circle  text-success"></i> <span class="sr-only">(current)</span></a>
                         </li>
 
                     </ul>
@@ -16,16 +16,15 @@
             </nav>
         </div>
         <div class="card-body">
-            <table class="table">
+            <table class="table table-bordered">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
 
-                        <th scope="col">Name</th>
+                        <th scope="col">Nama</th>
                         <th scope="col">Telp</th>
                         <th scope="col">Alamat</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,11 +33,9 @@
                         <td>{{item.Name}}</td>
                         <td>{{item.Telepon}}</td>
                         <td>{{item.Address}}</td>
-                        <td>{{item.Status}}</td>
-                        <td>
-                            <a ng-click="SelectedItem(item)" data-toggle="modal" data-target="#exampleModalCenter" href=""><i class="fas fa-trash text-info"></i></a>
+                        <td class="text-right">
+                            <a ng-click="SelectedItem(item)" data-toggle="modal" data-target="#exampleModalCenter" href=""><i class="fas fa-users-cog text-info"></i></a>
                             <a ng-click="EditItem(item)" data-target="#modal-container-825517" role="button" data-toggle="modal" href=""><i class="fas fa-edit text-warning"></i></a>
-                            <a><i class="fas fa-users">Reset Password</i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -54,7 +51,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="myModalLabel">
-                        Modal title
+                       User
                     </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
@@ -88,12 +85,6 @@
                             <textarea ng-model="model.Address" type="text" class="form-control"></textarea>
                         </div>
 
-                        <div class="form-group">
-                            <label>
-                                Alamat
-                            </label>
-                            <input ng-model="model.Status" type="text" class="form-control"/>
-                        </div>
                         <div class="modal-footer">
                             <button ng-click="SaveAgent(model)" type="button" class="btn btn-primary">
                                 Save changes
@@ -118,13 +109,22 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Delete Agent</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">{{LockTitle}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Yakin Hapus Data ?
+                <form class="form-inline">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="inlineCheckbox1">OFF&emsp;</label>
+                        <a ng-show="LockTitle==='Lock'" href="" ng-click="swich('UnLock')">  <i class="fas fa-toggle-off  text-dark"></i></a>
+                        <a ng-show="LockTitle==='UnLock'" href="" ng-click="swich('Lock')">  <i class="fas fa-toggle-on  text-primary"></i></a>
+                        <label class="form-check-label" for="inlineCheckbox1">&emsp; ON</label>
+                    </div>
+
+                </form>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

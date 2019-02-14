@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Ocph.DAL;
  
  namespace DataAccesLayer.Models 
@@ -45,10 +47,12 @@ using Ocph.DAL;
                set{ 
                       _pricevalue=value;
                      }
-          } 
+          }
 
-          [DbColumn("PortType")] 
-          public string PortType 
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        [DbColumn("PortType")] 
+          public PortType PortType 
           { 
                get{return _porttype;} 
                set{ 
@@ -62,7 +66,7 @@ using Ocph.DAL;
            private int  _agentid;
            private int  _cityid;
            private double  _pricevalue;
-           private string  _porttype;
+           private PortType _porttype;
       }
 }
 

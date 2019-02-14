@@ -1,5 +1,8 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using DataAccesLayer;
 using Microsoft.AspNet.Identity;
 using MySql.AspNet.Identity;
 
@@ -15,6 +18,9 @@ namespace WebApp.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+
+
     }
 
     public class ApplicationDbContext :MySQLDatabase
@@ -24,9 +30,33 @@ namespace WebApp.Models
         {
         }
 
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        public int GetUserCount()
+        {
+            try
+            {
+                using (var db = new OcphDbContext())
+                {
+                    var query = "SELECT COUNT(*) FROM  aspnetusers";
+                    var command = db.CreateCommand();
+                    command.CommandText = query;
+                    command.CommandType = System.Data.CommandType.Text;
+                    var result = command.ExecuteScalar();
+                    var data = Convert.ToInt32(result);
+                    return data;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw new SystemException("On Error");
+            }
+          
         }
     }
 }

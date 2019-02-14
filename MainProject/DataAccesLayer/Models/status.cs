@@ -47,14 +47,6 @@ using Ocph.DAL;
                      }
           } 
 
-          [DbColumn("DetailInformation")] 
-          public string DetailInformation 
-          { 
-               get{return _detailinformation;} 
-               set{ 
-                      _detailinformation=value;
-                     }
-          } 
 
           [DbColumn("STTId")] 
           public int STTId 
@@ -72,13 +64,14 @@ using Ocph.DAL;
                set{ 
                       _courierid=value;
                      }
-          } 
+          }
 
-          private int  _id;
+        public petugas Courier { get; set; }
+
+        private int  _id;
            private string  _recievername;
            private DateTime  _recievedate;
            private string  _recievecondition;
-           private string  _detailinformation;
            private int  _sttid;
            private int  _courierid;
       }

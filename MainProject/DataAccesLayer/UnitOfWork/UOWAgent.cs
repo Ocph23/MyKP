@@ -88,7 +88,7 @@ namespace DataAccesLayer.UnitOfWork
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            throw new SystemException("Data Tidak Dizinkan Untuk Dihapus");
         }
 
         public object AgentUsers(int agentId)

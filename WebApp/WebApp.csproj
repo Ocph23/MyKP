@@ -200,15 +200,21 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AgentController.cs" />
+    <Compile Include="Controllers\AgentDashboarController.cs" />
+    <Compile Include="Controllers\AppApiController.cs" />
     <Compile Include="Controllers\CityController.cs" />
-    <Compile Include="Controllers\ClientAccountController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
+    <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ManifestController.cs" />
     <Compile Include="Controllers\PriceController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -222,8 +228,18 @@
     <Content Include="Apps\admin\AdminService.js" />
     <Content Include="Apps\admin\index.html" />
     <Content Include="Apps\admin\Templates\city.html" />
+    <Content Include="Apps\admin\Templates\createinvoice.html" />
+    <Content Include="Apps\admin\Templates\dashboard.html" />
+    <Content Include="Apps\admin\Templates\find.html" />
+    <Content Include="Apps\admin\Templates\invoice.html" />
     <Content Include="Apps\admin\Templates\manageuser.html" />
+    <Content Include="Apps\admin\Templates\petugas.html" />
     <Content Include="Apps\admin\Templates\prices.html" />
+    <Content Include="Apps\admin\Templates\printinvoice.html" />
+    <Content Include="Apps\agent\templates\agentdashboard.html" />
+    <Content Include="Apps\agent\templates\agentprice.html" />
+    <Content Include="Apps\agent\templates\agentfindstt.html" />
+    <Content Include="Apps\agent\templates\agentinvoice.html" />
     <Content Include="Apps\agent\templates\createmanifest.html" />
     <Content Include="Apps\agent\templates\manifests.html" />
     <Content Include="Apps\app.config.js" />
@@ -237,12 +253,15 @@
     <Content Include="Apps\agent\agent.controller.js" />
     <Content Include="Apps\agent\agent.route.js" />
     <Content Include="Apps\agent\agent.Service.js" />
+    <Content Include="Apps\PrintFooter.html" />
+    <Content Include="Apps\PrintHeader.html" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\datepicker.css" />
     <Content Include="Content\jquery.pnotify.css" />
     <Content Include="Content\jquery.pnotify.icons.css" />
     <Content Include="Content\nprogress.css" />
@@ -251,7 +270,16 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\GettyImages-859526476.jpg" />
+    <Content Include="Images\Header.png" />
+    <Content Include="Images\preview.png" />
+    <Content Include="Images\Logo.png" />
+    <Content Include="Images\LOGO3rp.png" />
+    <Content Include="Images\Logopng.png" />
+    <Content Include="Images\trireksa.ico" />
     <Content Include="Memo.txt" />
+    <Content Include="node_modules\angular-qrcode\angular-qrcode.js" />
+    <Content Include="node_modules\qrcode-generator\qrcode.js" />
+    <Content Include="node_modules\qrcode-generator\qrcode_UTF8.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
@@ -269,6 +297,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\datepicker.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -290,6 +319,11 @@
     <Content Include="App_Readme\NProgressjs_README.md" />
     <Content Include="App_Readme\NProgressjs_LICENSE" />
     <Content Include="Apps\admin\Templates\agent.html" />
+    <Content Include="package.json" />
+    <Content Include="libman.json" />
+    <Content Include="bower.json" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\WebApp20181220095502 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -311,11 +345,14 @@
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\r.js" />
     <Content Include="Scripts\require.js" />
+    <Content Include="Scripts\terbilang.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

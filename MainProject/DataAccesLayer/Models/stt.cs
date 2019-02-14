@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Ocph.DAL;
  
  namespace DataAccesLayer.Models 
@@ -45,10 +47,33 @@ using Ocph.DAL;
                set{ 
                       _reciever=value;
                      }
-          } 
+          }
 
-          [DbColumn("WeightType")] 
-          public string WeightType 
+        [DbColumn("ShiperAddress")]
+        public string ShiperAddress
+        {
+            get { return _shiperAddress; }
+            set
+            {
+                _shiperAddress = value;
+            }
+        }
+
+        [DbColumn("RecieverAddress")]
+        public string RecieverAddress
+        {
+            get { return _recieverAddress; }
+            set
+            {
+                _recieverAddress = value;
+            }
+        }
+
+
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        [DbColumn("WeightType")] 
+          public WeightType WeightType 
           { 
                get{return _weighttype;} 
                set{ 
@@ -83,18 +108,32 @@ using Ocph.DAL;
                      }
           }
 
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        [DbColumn("ShippingBy")]
+        public PortType ShippingBy { get; set; }
+
         [DbColumn("CityId")]
         public int CityId { get; set; }
+
+
+
+        public double PriceValue { get; set; }
+        public status Status { get; set; }
+        public manifest Manifest { get; set; }
+        public city City { get; set; }
 
         private int  _id;
            private string  _stt;
            private string  _shiper;
            private string  _reciever;
-           private string  _weighttype;
+           private WeightType _weighttype;
            private int  _pcs;
            private double  _weightvalue;
            private int  _manifestid;
-      }
+        private string _shiperAddress;
+        private string _recieverAddress;
+    }
 }
 
 

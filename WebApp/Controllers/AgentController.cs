@@ -203,25 +203,7 @@ namespace WebApp.Controllers
             }
         }
 
-        [Authorize(Roles ="Agent")]
-        [Route("api/Agent/getuserprofile")]
-        public IHttpActionResult GetUserProfile()
-        {
-            try
-            {
-                UOWAgentProfile context = new UOWAgentProfile();
-                var userid = User.Identity.GetUserId();
-                if (string.IsNullOrEmpty(userid))
-                    throw new SystemException("Anda Tidak Memiliki Akses");
-                return Ok(context.GetUserProfile(userid));
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-        }
-
+      
 
        
         public ApplicationSignInManager SignInManager

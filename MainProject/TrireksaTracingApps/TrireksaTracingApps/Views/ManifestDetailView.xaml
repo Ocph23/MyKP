@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" BackgroundColor="LightGray" Title="Detail"
+             x:Class="TrireksaTracingApps.Views.ManifestDetailView">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Terima" Command="{Binding TerimaCommand}">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="UWP" Value="add.png"/>
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid Padding="5" Margin="1"  >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Padding="10" BackgroundColor="White" Grid.Row="0">
+                <Label StyleClass="labelText" Text="{Binding Manifest.AgentName}" FontSize="Medium" HorizontalOptions="Start"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label StyleClass="labelText" WidthRequest="110" Text="No. Manifest"/>
+                    <Label StyleClass="labelText" Text="{Binding Manifest.NumberView,StringFormat=': {0}'}}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label StyleClass="labelText" WidthRequest="110" Text="Jumlah"/>
+                    <Label StyleClass="labelText" Text="{Binding Manifest.Package,StringFormat=': {0}'}}"/>
+                    <Label StyleClass="labelText" Text="Karung"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label StyleClass="labelText" WidthRequest="110" Text="Tanggal"/>
+                    <Label StyleClass="labelText" Grid.Column="1" FontSize="Small" Text="{Binding Manifest.CreateDate,StringFormat=': {0:MMMM d, yyyy HH:mm}'}" HorizontalOptions="End"/>
+                </StackLayout>
+            </StackLayout>
+            <ListView BackgroundColor="White" Grid.Row="1" ItemsSource="{Binding Manifest.Items}" SeparatorVisibility="Default" SeparatorColor="LightGray" HasUnevenRows = "true"
+                     IsRefreshing="{Binding IsBusy}" RefreshCommand="{Binding RefreshCommand}">
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <ViewCell  >
+                            <Grid Padding="10" Margin="2" BackgroundColor="White" >
+                                <StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label StyleClass="labelText" WidthRequest="100" Text="STT"/>
+                                        <Label StyleClass="labelText" Text="{Binding STT,StringFormat=': {0}'}"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label StyleClass="labelText" WidthRequest="100" Text="Pengirim"/>
+                                        <Label StyleClass="labelText" Text="{Binding Shiper,StringFormat=': {0}'}}"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label StyleClass="labelText" WidthRequest="100" Text="Penerima"/>
+                                        <Label StyleClass="labelText" Text="{Binding Reciever,StringFormat=': {0}'}}"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label StyleClass="labelText" WidthRequest="100" Text="Jumlah"/>
+                                        <Label StyleClass="labelText" Text="{Binding Pcs,StringFormat=': {0}'}}"/>
+                                        <Label StyleClass="labelText" Text=" Pcs"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label StyleClass="labelText" WidthRequest="100" Text="Berat"/>
+                                        <Label StyleClass="labelText" Text="{Binding WeightValue,StringFormat=': {0}'}}"/>
+                                        <Label StyleClass="labelText" Text=" Kg"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

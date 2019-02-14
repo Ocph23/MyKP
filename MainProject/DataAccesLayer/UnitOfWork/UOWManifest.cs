@@ -16,12 +16,12 @@ namespace DataAccesLayer.UnitOfWork
             {
                 using (var db = new OcphDbContext())
                 {
-                    var result = db.Manifests.Where(O => O.AgentId == agentId);
-                    foreach(var item in result)
-                    {
-                        item.Items = db.STT.Where(O => O.ManifestId == item.Id).ToList();
-                    }
-
+                    var result = from a in db.Manifests.Where(O => O.AgentId == agentId)
+                                 join b in db.Agents.Select() on a.AgentId equals b.AgentId
+                                 join c in db.AgentAdmins.Select() on a.AgentAdminId equals c.Id
+                                 select new manifest { AgentAdminId=a.AgentAdminId, AgentId=a.AgentId, CreateDate=a.CreateDate, DetailInformation=a.DetailInformation,
+                                  Id=a.Id, Number=a.Number, Package=a.Package, PortType=a.PortType, RecieveOnPort=a.RecieveOnPort, SendedDate=a.SendedDate,User=c, Agent=b};
+                    
                     return result.ToList();
                 }
             }
@@ -32,7 +32,46 @@ namespace DataAccesLayer.UnitOfWork
             }
         }
 
+        public manifest GetManifestById(int id)
+        {
+            try
+            {
+                using (var db = new OcphDbContext())
+                {
+                    var item= db.Manifests.Where(O => O.Id == id).FirstOrDefault();
+                    if(item!=null)
+                    {
+                        item.Items = (from b in db.STT.Where(O => O.ManifestId == item.Id)
+                                     join c in db.Cities.Select() on b.CityId equals c.Id
+                                     select new stt
+                                     {
+                                         CityId = b.CityId,
+                                         Id = b.Id,
+                                         ManifestId = b.ManifestId,
+                                         Pcs = b.Pcs,
+                                         Reciever = b.Reciever,
+                                         RecieverAddress = b.RecieverAddress,
+                                         Shiper = b.Shiper,
+                                         ShiperAddress = b.ShiperAddress,
+                                         STT = b.STT,
+                                         WeightType = b.WeightType,
+                                         WeightValue = b.WeightValue,   ShippingBy=b.ShippingBy, 
+                                         City = c
+                                     }).ToList();
 
+                        item.User = db.AgentAdmins.Where(O => O.AgentId == item.AgentId).FirstOrDefault();
+                        return item;
+                    }
+
+                    throw new SystemException("Manifest Tidak Ditemukan");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new SystemException(ex.Message);
+            }
+        }
 
         public manifest CreateManifest(manifest data)
         {
@@ -53,6 +92,44 @@ namespace DataAccesLayer.UnitOfWork
             }
         }
 
+        public object UpdateManifest(manifest value)
+        {
+            using (var db=new OcphDbContext())
+            {
+                try
+                {
+                    var updated = db.Manifests.Update(O => new { O.DetailInformation, O.RecieveOnPort, O.Number, O.Package, O.PortType, O.SendedDate }, value, O => O.Id == value.Id);
+                    if (updated)
+                        return value;
+                    throw new SystemException("Data Tidak Tersimpan");
+                }
+                catch (Exception ex)
+                {
+                    throw new SystemException(ex.Message);
+                }
+            }
+        }
+
+        public object GetNewManifest()
+        {
+            using (var db = new OcphDbContext())
+            {
+                try
+                {
+                    var command = db.CreateCommand();
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.CommandText = "newmanifest";
+                    var result = command.ExecuteReader();
+                    var datas = Ocph.DAL.Mapping.MySql.MappingProperties<manifest>.MappingTable(result);
+                    return datas;
+
+                }
+                catch (Exception ex)
+                {
+                    throw new SystemException(ex.Message);
+                }
+            }
+        }
 
         public stt AddNewItem(int manifestId, stt item)
         {
@@ -81,6 +158,124 @@ namespace DataAccesLayer.UnitOfWork
             }
         }
 
+        public manifest ManifestByAgentId(int agentid, int manifestNumber)
+        {
+            using (var db = new OcphDbContext())
+            {
+                try
+                {
+                    var manifestData = db.Manifests.Where(O => O.AgentId == agentid && O.Number == manifestNumber).FirstOrDefault();
+                    if (manifestData != null)
+                    {
+                        var result = (from b in db.STT.Where(O=>O.ManifestId== manifestData.Id)
+                             join c in db.Cities.Select() on b.CityId equals c.Id
+                             select new stt
+                             {
+                                 CityId = b.CityId,
+                                 Id = b.Id,
+                                 ManifestId = b.ManifestId,
+                                 Pcs = b.Pcs,
+                                 Reciever = b.Reciever,
+                                 RecieverAddress = b.RecieverAddress,
+                                 Shiper = b.Shiper,
+                                 ShiperAddress = b.ShiperAddress,
+                                 STT = b.STT,
+                                 WeightType = b.WeightType,
+                                 WeightValue = b.WeightValue,   ShippingBy=b.ShippingBy,
+                                 City = c
+                             }).ToList();
+
+
+                        
+
+                        foreach (var item in result)
+                        {
+                            item.Status = (from a in db.Statuses.Where(O => O.STTId == item.Id)
+                                           join b in db.Workers.Select() on a.CourierId equals b.Id
+                                           select new status
+                                           {
+                                               CourierId = a.CourierId,
+                                               Id = a.Id,
+                                               RecieveCondition = a.RecieveCondition,
+                                               RecieveDate = a.RecieveDate,
+                                               RecieverName = a.RecieverName,
+                                               STTId = a.STTId,
+                                               Courier = b
+                                           }
+
+                                           ).FirstOrDefault();
+                        }
+
+
+                      manifestData.Items = result.ToList();
+                        return manifestData;
+
+                    }
+                   
+                    throw new SystemException("Data Tidak Ditemukan");
+                }
+                catch (Exception ex)
+                {
+                    throw new SystemException(ex.Message);
+                }
+            }
+        }
+
+        public stt UpdateItem(int id, stt item)
+        {
+            using (var db = new OcphDbContext())
+            {
+                try
+                {
+                    var saved = db.STT.Update(O => new { O.Pcs, O.Reciever,  O.RecieverAddress,O.ShippingBy, O.Shiper, O.ShiperAddress, O.WeightType, O.WeightValue,O.CityId }, item, O => O.Id == item.Id);
+                    if (saved)
+                        return item;
+                    throw new SystemException("Data Tidak Tersimpan");
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw new SystemException(ex.Message);
+                }
+            }
+        }
+
+        public List<stt> Find(int agentId, string stt)
+        {
+            using (var db = new OcphDbContext())
+            {
+                try
+                {
+                    var result = from a in db.Manifests.Where(O => O.AgentId == agentId)
+                                 join b in db.STT.Select() on a.Id equals b.ManifestId
+                                 join c in db.Cities.Select() on b.CityId equals c.Id
+                                 select new stt { CityId=b.CityId, ShippingBy=b.ShippingBy, Id=b.Id, ManifestId=b.ManifestId, Pcs=b.Pcs, Reciever=b.Reciever, RecieverAddress=b.RecieverAddress,
+                                  Shiper=b.Shiper, ShiperAddress=b.ShiperAddress, STT=b.STT, WeightType=b.WeightType, WeightValue=b.WeightValue,Manifest=a, City=c};
+
+                    var datas = result.Where(O => O.STT.Contains(stt)).ToList();
+                    foreach (var item in datas)
+                    {
+                        item.Status = (from a in  db.Statuses.Where(O => O.STTId == item.Id)
+                                        join b in db.Workers.Select() on a.CourierId equals b.Id
+                                        select new status { CourierId=a.CourierId, Id=a.Id, RecieveCondition=a.RecieveCondition,
+                                            RecieveDate =a.RecieveDate, RecieverName=a.RecieverName, STTId=a.STTId , Courier=b}
+                                       
+                                       ).FirstOrDefault();
+                    }
+
+
+                    var dataResult= datas.ToList();
+                    if (dataResult.Count > 0)
+                        return dataResult;
+                    throw new SystemException("Data Tidak Ditemukan");
+                }
+                catch (Exception ex)
+                {
+                    throw new SystemException(ex.Message);
+                }
+            }
+        }
 
         public bool DeleteItem(int sttId)
         {

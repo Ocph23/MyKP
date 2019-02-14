@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" Title="Manifest Baru"
+             x:Class="TrireksaTracingApps.Views.ManifestView">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="LightGray">
+            <ListView ItemsSource="{Binding Source}" SeparatorVisibility="Default" SeparatorColor="LightGray" HasUnevenRows = "true"
+                     IsRefreshing="{Binding IsBusy}" RefreshCommand="{Binding RefreshCommand}" ItemTapped="ListView_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <ViewCell  >
+                            <Grid Padding="10" Margin="3" BackgroundColor="White" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <StackLayout>
+                                    <Label StyleClass="labelText" Grid.Column="1" FontSize="Small" Text="{Binding CreateDate,StringFormat='{0:MMMM d, yyyy HH:mm}'}" HorizontalOptions="End"/>
+                                    <Label StyleClass="labelText" Text="{Binding AgentName}" FontSize="Medium" HorizontalOptions="Start"/>
+                                </StackLayout>
+                                <StackLayout Grid.Row="1" Margin="10,0">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label StyleClass="labelText" WidthRequest="150" Text="No. Manifest : "/>
+                                        <Label StyleClass="labelText" Text="{Binding NumberView}"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label StyleClass="labelText" WidthRequest="150" Text="Jumlah : "/>
+                                        <Label StyleClass="labelText" Text="{Binding Package}"/>
+                                        <Label StyleClass="labelText" Text=" Pcs"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

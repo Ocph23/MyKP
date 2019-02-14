@@ -1,0 +1,21 @@
+﻿^contentpage {
+    background-color: #00796b;
+    border: 2 solid red;
+    border-radius: 5;
+}
+
+^button {
+    background-color: #26a69a;
+    height: 50;
+    border-radius: 5;
+}
+
+
+^label{
+    color:white;
+}
+
+
+.labelText{
+    color:black;
+}

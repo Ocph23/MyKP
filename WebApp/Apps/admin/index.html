@@ -1,4 +1,6 @@
-﻿<div id="wrapper">
+﻿<div class="print-only" ng-include="'Apps/PrintHeader.html'"></div>
+
+<div id="wrapper">
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
@@ -8,24 +10,29 @@
                 </a>
             </li>
             <li>
-                <a href="#">Dashboard</a>
+                <a ui-sref="dashboard">Dashboard</a>
+            </li>
+            <li>
+                <div> <a ui-sref="adminfind">Cari ..</a></div>
+            </li>
+            <li>
+                <div> <a ui-sref="adminagent">Agen</a></div>
+            </li>
+            <li>
+                <a ui-sref="cities">Kota Tujuan</a>
+            </li>
+            <li>
+                <a ui-sref="petugas">Petugas</a>
             </li>
             <li>
                 <a href="" role="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                    Agent
+                    Invoice
                 </a>
                 <div style="padding-left:15px" class="collapse" id="collapseExample">
-                    <div> <a ui-sref="adminagent">Daftar</a></div>
-                    <div> <a ui-sref="adminagent" href="">Cari</a></div>
+                    <div> <a ui-sref="createinvoice({data:null})">Baru</a></div>
+                    <div> <a ui-sref="invoices">Daftar Invoice</a></div>
                 </div>
             </li>
-            <li>
-                <a ui-sref="cities">Cities</a>
-            </li>
-            <li>
-                <a href="#">Services</a>
-            </li>
-
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -38,11 +45,9 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-md-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown">User</a>
+                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown">{{User.Name}}</a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider">
-                            </div> <a class="dropdown-item" href="#">Separated link</a>
+                            <a role="button" class="dropdown-item" href="" ng-click="logout()">Log Out</a>
                         </div>
                     </li>
                 </ul>
@@ -55,6 +60,11 @@
     <!-- /#page-content-wrapper -->
     
 </div>
+
+
+<div class="print-only" ng-include="'Apps/PrintFooter.html'"></div>
+
+
 <!-- /#wrapper -->
 <!-- Bootstrap core JavaScript -->
 <!-- Menu Toggle Script -->

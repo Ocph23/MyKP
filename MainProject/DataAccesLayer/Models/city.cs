@@ -43,9 +43,7 @@ using Ocph.DAL;
         private int  _id;
            private string  _name;
            private string  _code;
-           private string  _shiperaddress;
-           private string  _recieveraddress;
-           private int  _destinationid;
+         
       }
 }
 

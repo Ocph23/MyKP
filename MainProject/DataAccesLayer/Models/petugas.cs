@@ -27,9 +27,20 @@ using Ocph.DAL;
                set{ 
                       _name=value;
                      }
-          } 
+          }
 
-          [DbColumn("Address")] 
+        [DbColumn("Email")]
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                _email = value;
+            }
+        }
+
+
+        [DbColumn("Address")] 
           public string Address 
           { 
                get{return _address;} 
@@ -45,13 +56,36 @@ using Ocph.DAL;
                set{ 
                       _handphone=value;
                      }
-          } 
+          }
 
-          private int  _id;
+        [DbColumn("UserId")]
+        public string UserId
+        {
+            get { return _userid; }
+            set
+            {
+                _userid = value;
+            }
+        }
+
+        private string role;
+
+        public string Role
+        {
+            get { return role; }
+            set { role = value; }
+        }
+
+
+
+
+        private int  _id;
            private string  _name;
            private string  _address;
            private string  _handphone;
-      }
+        private string _userid;
+        private string _email;
+    }
 }
 
 

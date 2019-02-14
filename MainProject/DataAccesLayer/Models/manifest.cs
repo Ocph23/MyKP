@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Ocph.DAL;
+
  
  namespace DataAccesLayer.Models 
 { 
@@ -29,8 +32,8 @@ using Ocph.DAL;
                      }
           } 
 
-          [DbColumn("UpdateDate")] 
-          public DateTime UpdateDate 
+          [DbColumn("SendedDate")] 
+          public DateTime SendedDate 
           { 
                get{return _updatedate;} 
                set{ 
@@ -45,16 +48,32 @@ using Ocph.DAL;
                set{ 
                       _number=value;
                      }
-          } 
+          }
 
-          [DbColumn("PortType")] 
-          public string PortType 
+
+        [DbColumn("Package")]
+        public int Package
+        {
+            get { return _package; }
+            set
+            {
+                _package = value;
+            }
+        }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        [DbColumn("PortType")] 
+
+          public PortType PortType 
           { 
                get{return _porttype;} 
                set{ 
                       _porttype=value;
                      }
           } 
+
+
+
 
           [DbColumn("DetailInformation")] 
           public string DetailInformation 
@@ -84,7 +103,7 @@ using Ocph.DAL;
           } 
 
           [DbColumn("RecieveOnPort")] 
-          public DateTime RecieveOnPort 
+          public DateTime? RecieveOnPort 
           { 
                get{return _recieveonport;} 
                set{ 
@@ -93,17 +112,34 @@ using Ocph.DAL;
           }
 
         public List<stt> Items { get;  set; }
+        public agentadmin User { get; set; }
+        public agent Agent { get; internal set; }
+
+        public string NumberView
+        {
+            get
+            {
+                if (Agent != null)
+                    return string.Format("{0}/{1}-TRP/{2}", Number, Agent.Code, CreateDate.Year);
+                else
+                    return Number.ToString();
+            }
+        }
+
+
+        public string AgentName { get; set; }
 
         private int  _id;
            private DateTime  _createdate;
            private DateTime  _updatedate;
            private int  _number;
-           private string  _porttype;
+           private PortType  _porttype;
            private string  _detailinformation;
            private int  _agentid;
            private int  _agentadminid;
-           private DateTime  _recieveonport;
-      }
+           private DateTime?  _recieveonport;
+        private int _package;
+    }
 }
 
 

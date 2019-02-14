@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Security.Claims;
@@ -32,8 +33,9 @@ namespace WebApp
                 msg.IsBodyHtml = true;
 
                 smtpClient.EnableSsl = true;
-                smtpClient.UseDefaultCredentials = false;
+                smtpClient.UseDefaultCredentials = true;
                 smtpClient.Credentials = loginInfo;
+
                 smtpClient.Send(msg);
             }
             catch (Exception ex)
@@ -61,6 +63,7 @@ namespace WebApp
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
+
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
@@ -102,6 +105,10 @@ namespace WebApp
             manager.EmailService = new EmailService();
             manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;
+
+            
+
+
             if (dataProtectionProvider != null)
             {
                 manager.UserTokenProvider =
@@ -109,6 +116,7 @@ namespace WebApp
             }
             return manager;
         }
+        
     }
 
     // Configure the application sign-in manager which is used in this application.
