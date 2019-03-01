@@ -75,6 +75,15 @@ namespace DataAccesLayer.UnitOfWork
                 {
                    var data  = db.Workers.Select().ToList();
                     if (data!=null)
+                    {
+                        foreach (var item in data)
+                        {
+                            item.Roles = (from a in db.UserRoles.Where(O => O.UserId == item.UserId)
+                                          join b in db.Roles.Select() on a.RoleId equals b.Id
+                                          select b).ToList();
+
+                        }
+                    }
                         return data;
                     throw new SystemException("Data Tidak Ditemukan");
                 }
@@ -89,15 +98,40 @@ namespace DataAccesLayer.UnitOfWork
         {
             using (var db = new OcphDbContext())
             {
+                var trans = db.BeginTransaction();
                 try
                 {
                     var saved= db.Workers.Update(O=> new {O.Address, O.Handphone,O.Name } ,item,O=>O.Id==item.Id);
                     if (saved)
+                    {
+                        foreach(var data in item.Roles )
+                        {
+                            var r = db.Roles.Where(O => O.Name == data.Name).FirstOrDefault();
+                            if(r !=null & data.Id=="0")
+                            {
+                                data.Id = r.Id;
+                               if(!db.UserRoles.Insert(new userrole { RoleId=r.Id, UserId=item.UserId }))
+                                    throw new SystemException("Tidak Berhasil Tambah Petugas");
+                            }
+
+                            if(r!=null & data.Id=="-1")
+                            {
+                                if(!db.UserRoles.Delete(O=>O.UserId==item.UserId && O.RoleId== r.Id))
+                                    throw new SystemException("Tidak Berhasil Tambah Petugas");
+                     
+                            }
+                        }
+
+                        item.Roles.RemoveAll(O => O.Id == "-1");
+                        trans.Commit();
                         return item;
+                    }
+            
                     throw new SystemException("Tidak Berhasil Tambah Petugas");
                 }
                 catch (Exception ex)
                 {
+                    trans.Rollback();
                     throw new SystemException(ex.Message);
                 }
             }

@@ -71,7 +71,7 @@
                             <label>
                                 Email
                             </label>
-                            <input ng-model="model.Email" type="email" class="form-control" required ng-readonly="model.Id!==undefined"/>
+                            <input ng-model="model.Email" type="email" class="form-control" required ng-readonly="model.Id!==undefined" />
                         </div>
 
                         <div class="form-group">
@@ -93,8 +93,27 @@
                             </label>
                             <select class="form-control" ng-options="item as item for item in Roles" ng-model="model.Role"></select>
                         </div>
+
+                        <div class="form-group" ng-if="model.Id!==undefined">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">User Rule</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-inline" ng-repeat="item in RolesView">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-control" type="checkbox" ng-model="item.Checked" />
+                                    </div>
+                                    <label class="form-check-label" for="inlineCheckbox1">{{item.Name}}&emsp;</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
                         <div class="modal-footer">
-                            <button  type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary">
                                 Save changes
                             </button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -130,10 +149,11 @@
                         <a ng-show="LockTitle==='UnLock'" href="" ng-click="swich('Lock')">  <i class="fas fa-toggle-on fa-2x text-primary"></i></a>
                         <label class="form-check-label" for="inlineCheckbox1">&emsp; Aktifkan</label>
                     </div>
-                
+
                 </form>
-               
+
             </div>
+            
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button ng-click="delete()" data-dismiss="modal" type="button" class="btn btn-danger">Yes</button>

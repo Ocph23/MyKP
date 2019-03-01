@@ -14,6 +14,7 @@ namespace TrireksaTracingApps.ViewModels
     {
         public IAuthService<AuthenticationToken> AuthServices => DependencyService.Get<IAuthService<AuthenticationToken>>() ?? new AuthService();
         public IManifestService<manifest> ManifestServices => DependencyService.Get<IManifestService<manifest>>() ?? new ManifestService();
+        public IDataStore<stt> StatusServices => DependencyService.Get<IDataStore<stt>>() ?? new StatusService();
 
         bool isBusy = false;
         public bool IsBusy

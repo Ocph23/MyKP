@@ -12,7 +12,7 @@ angular.module('admin.routes', [])
                 url: '/dashboard',
                 parent:'admin',
                 templateUrl: '/apps/admin/templates/dashboard.html',
-                controller: 'AdminUserController'
+                controller: 'DashboardController'
             })
 
             .state('adminagent', {

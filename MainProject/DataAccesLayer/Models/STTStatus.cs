@@ -11,5 +11,7 @@ namespace DataAccesLayer.Models
         public int Number { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime SendedDate { get; set; }
+        public string AgentName { get; set; }
+        public string AgentCode { get; set; }
     }
 }

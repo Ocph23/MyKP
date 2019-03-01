@@ -1,10 +1,134 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+﻿
 
-</body>
-</html>
+<div class="col-md-12">
+    <div id="chart" class="card">
+        <div class="card-header">
+            <h5>Status Penerimaan</h5>
+        </div>
+        <div class="card-body">
+            <div class="row col-md-12">
+                <div class="col-md-4">
+                    <canvas id="doughnut" class="chart chart-doughnut"
+                            chart-colors="colors"
+                            chart-data="data" chart-labels="labels"></canvas>
+                </div>
+                <div class="col-md-8">
+                  
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <h3>STT BELUM ADA STATUS PENERIMAAN</h3>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Agent</th>
+                                <th>STT</th>
+                                <th>Pengirim</th>
+                                <th>Penerima</th>
+                                <th>Jumlah</th>
+                                <th>Berat</th>
+                            </tr>
+                            <tr ng-repeat="item in SttNotHaveStatus.Datas">
+                                <td>{{item.AgentCode}}</td>
+                                <td>{{item.STT}}</td>
+                                <td>{{item.Shiper}}</td>
+                                <td>{{item.Reciever}}</td>
+                                <td>{{item.Pcs}}</td>
+                                <td>{{item.WeightValue}}Kg</td>
+                            </tr>
+                        </tbody>
+
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h5>Invoice Jatuh Tempo</h5>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Nomor</th>
+                        <th>Agent</th>
+                        <th>Jumlah</th>
+                        <th>Tanggal</th>
+                    </tr>
+                    <tr ng-repeat="item in InvoiceDeadline">
+                        <td>{{item.NumberView}}</td>
+                        <td>{{item.Agent.Name}}</td>
+                        <td style="text-align:right">Rp. {{item.GrandTotal|number}}</td>
+                        <td>{{item.DeadLine | date:'dd-MM-yyyy'}}</td>
+                    </tr>
+                </tbody>
+
+
+            </table>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h5>MANIFEST BARU</h5>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Nomor</th>
+                        <th>Agent</th>
+                        <th>Tanggal</th>
+                    </tr>
+                    <tr ng-repeat="item in ManifestCount">
+                        <td>{{item.NumberView}}</td>
+                        <td>{{item.Agent.Name}}</td>
+                        <td>{{item.Tanggal | date:'dd-MM-yyyy'}}</td>
+                    </tr>
+                </tbody>
+
+
+            </table>
+          
+        </div>
+    </div>
+</div>
+
+<style>
+
+    .card {
+        margin-top: 10px;
+    }
+
+    .card-header {
+        background-color: #99b433;
+    }
+
+    .card-body {
+        min-height: 100px;
+        text-align: left;
+    }
+
+    #chart {
+        margin-right: 0px;
+    }
+
+    .table {
+        width: 100%;
+    }
+
+        .table thead, tbody {
+            overflow: auto;
+            display: block;
+            max-height: 200px;
+        }
+</style>

@@ -16,8 +16,11 @@
 
 function AdminUserController($scope, AuthServices,$state) {
     //var data = AuthServices.getAgentProfile();
-    AuthServices.userRoleIs("Admin");
-
+   // AuthServices.userRoleIs("Admin");
+   //$scope.IsAdmin = AuthServices.roleIs("Admin");
+    //$scope.IsAccounting = AuthServices.roleIs("Accounting");
+    //$scope.IsCurrier = AuthServices.roleIs("Courier");
+    $scope.AuthServices = AuthServices;
     $scope.logout = function () {
         AuthServices.logout();
     };
@@ -29,14 +32,41 @@ function AdminUserController($scope, AuthServices,$state) {
 }
 
 
-function DashboardController() {
-    AuthServices.userRoleIs("Admin");
+function DashboardController($scope, AdminDashboardServices, AuthServices) {
+
+    $scope.AuthServices = AuthServices;
+    $scope.labels = ["Ada Status", "Tidak Ada Status"];
+    $scope.colors = ['#07BEB8', '#FE4A49', '#803690', '#00ADF9', '#FDB45C', '#949FB1', '#4D5360'];
+
+
+    NProgress.start();
+    setTimeout(Init, 1000);
+
+    function Init() {
+     
+        AdminDashboardServices.invoiceCount().then(function (response) {
+            $scope.InvoiceCount = response;
+            AdminDashboardServices.manifestCount().then(function (response) {
+                $scope.ManifestCount = response;
+                AdminDashboardServices.sttNotHaveStatus().then(function (response) {
+                    $scope.SttNotHaveStatus = response;
+                    $scope.data = [$scope.SttNotHaveStatus.Count - $scope.SttNotHaveStatus.Datas.length, $scope.SttNotHaveStatus.Datas.length];
+                    AdminDashboardServices.invoiceDeadline().then(function (response) {
+                        $scope.InvoiceDeadline = response;
+                        NProgress.done();
+                    });
+                });
+            });
+        });
+
+    }
 }
 
 
 function AdminAgentController($scope, AdminService, MessageServices, AdminManageUserService, AuthServices) {
-    AuthServices.userRoleIs("Admin");
 
+    
+    $scope.AuthServices = AuthServices;
     $scope.Selected = {};
     $scope.model = {};
     AdminService.get().then(function (response) {
@@ -77,7 +107,8 @@ function AdminAgentController($scope, AdminService, MessageServices, AdminManage
 
 
 function AdminUserManageController($scope, $stateParams, $state, MessageServices,  AdminManageUserService, AuthServices, AdminManageWorkerService) {
-    AuthServices.userRoleIs("Admin");
+   
+    $scope.AuthServices = AuthServices;
     $scope.LockTitle = "Lock";
     var data = $stateParams.data;
     $scope.Agent = {};
@@ -138,8 +169,7 @@ function AdminUserManageController($scope, $stateParams, $state, MessageServices
 
 
 function AdminCityManageController($scope, MessageServices, CityServices, AuthServices) {
-    AuthServices.userRoleIs("Admin");
-
+    $scope.AuthServices = AuthServices;
     $scope.Selected = {};
     $scope.model = {};
     CityServices.get().then(function (response) {
@@ -179,7 +209,7 @@ function AdminCityManageController($scope, MessageServices, CityServices, AuthSe
 
 
 function AdminPriceManageController($scope, $stateParams, $state, MessageServices, CityServices, PriceServices, AuthServices) {
-    AuthServices.userRoleIs("Admin");
+    $scope.AuthServices = AuthServices;
     var data = $stateParams.data;
     if (data === null)
         $state.go('adminagent');
@@ -239,7 +269,7 @@ function AdminPriceManageController($scope, $stateParams, $state, MessageService
 
 
 function AdminFindController($scope,AdminService, AuthServices, ManifestServices, StatusServices, AdminManageWorkerService) {
-    AuthServices.userRoleIs("Admin");
+    $scope.AuthServices = AuthServices;
     $scope.findBy = "STT";
     $scope.Workers = [];
 
@@ -294,8 +324,9 @@ function AdminFindController($scope,AdminService, AuthServices, ManifestServices
 }
 
 
-function AdminPetugasController($scope, AdminManageWorkerService,MessageServices ) {
-    $scope.Roles = ["Admin", "Courier"];
+function AdminPetugasController($scope, AdminManageWorkerService, MessageServices, AuthServices) {
+    $scope.AuthServices = AuthServices;
+    $scope.Roles = ["Admin","Accounting", "Courier"];
     $scope.LockTitle = "Lock";
 
     AdminManageWorkerService.get().then(function (response) {
@@ -310,7 +341,31 @@ function AdminPetugasController($scope, AdminManageWorkerService,MessageServices
                 $scope.Datas.push(response);
             });
         } else {
-            AdminManageWorkerService.update(model.Id,model).then(function (response) {
+            $scope.RolesView.forEach(x => {
+                var isFound = false;
+                $scope.model.Roles.forEach(y => {
+                    if (x.Name.toLowerCase() === y.Name.toLowerCase()) {
+                        isFound = true;
+                        if (!x.Checked) {
+                            y.Id = "-1";
+                        }
+                    }
+                });
+
+
+
+                if (!isFound & x.Checked) {
+                    var data = {};
+                    data.Name = x.Name;
+                    data.Id = "0";
+                    $scope.model.Roles.push(data);
+                }
+            });
+
+
+            AdminManageWorkerService.update(model.Id, model).then(function (response) {
+                $scope.model.Roles = response.data.Roles;
+
                 MessageServices.info("Success");
             });
         }
@@ -319,10 +374,29 @@ function AdminPetugasController($scope, AdminManageWorkerService,MessageServices
 
     $scope.EditItem = function (item) {
         $scope.model = item;
-    };
+        $scope.RolesView = [];
+        $scope.Roles.forEach(x => {
+            var isFound = false;
+            $scope.model.Roles.forEach(y => {
+                if (x.toLowerCase() === y.Name.toLowerCase()) {
+                    isFound = true;
+                }
+            });
 
+            var data = {};
+            data.Name = x;
+            data.Checked = false;
+            if (isFound)
+                data.Checked = true;
+
+            $scope.RolesView.push(data);
+        });
+    };
+    $scope.RolesView = [];
     $scope.SelectedItem = function (item) {
+      
         $scope.Selected = item;
+        
     };
 
     $scope.delete = function () {
@@ -346,8 +420,8 @@ function AdminPetugasController($scope, AdminManageWorkerService,MessageServices
 }
 
 
-function AdminInvoiceController($scope, InvoiceServices) {
-
+function AdminInvoiceController($scope, InvoiceServices, AuthServices) {
+    $scope.AuthServices = AuthServices;
     $scope.Statuses = ["Baru", "Tunda", "Panjar", "Pelunasan", "Lunas", "Batal"];
 
     InvoiceServices.get().then(function (response) {
@@ -377,7 +451,7 @@ function AdminInvoiceController($scope, InvoiceServices) {
 
 
 function AdminCreateInvoiceController($scope, AdminService, AuthServices, InvoiceServices, $stateParams, MessageServices) {
-
+    $scope.AuthServices = AuthServices;
     $scope.Title = "Invoice Baru";
     $scope.model = $stateParams.data;
     $scope.User = {};
@@ -465,6 +539,7 @@ function AdminCreateInvoiceController($scope, AdminService, AuthServices, Invoic
 }
 
 function AdminPrintInvoiceController($scope, $state, $stateParams,MessageServices,TerbilangServices) {
+    $scope.AuthServices = AuthServices;
     $scope.model = {};
     var data = $stateParams.data;
 

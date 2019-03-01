@@ -82,7 +82,7 @@ function AuthServices($http, $state, $rootScope, MessageServices, $q) {
 
     var service = {
         login: login, register: register, getUserAdminProfile: getUserAdminProfile, getUserAgentProfile: getUserAgentProfile,
-        logout: logout, userRoleIs: userRoleIs,
+        logout: logout, userRoleIs: userRoleIs, roleIs:roleIs,
         getToken: getToken, getHeaders: getHeaders, getUserProfile: getUserProfile, print: printDoc
     };
 
@@ -106,9 +106,13 @@ function AuthServices($http, $state, $rootScope, MessageServices, $q) {
             sessionStorage.setItem("Role", result.roles);
             NProgress.done();
             var doc = document.getElementById('loginForm');
-            doc.style.animation='hideLogin 3s';
+            doc.style.animation = 'hideLogin 3s';
+         
             window.setTimeout(function () {
-                $state.go(result.roles.toLowerCase());
+                var rule = "admin";
+                if (userRoleIs("agent"))
+                    rule = "agent";
+                $state.go(rule);
             }, 2000);
 
             }, function errorCallback(response) {
@@ -142,13 +146,37 @@ function AuthServices($http, $state, $rootScope, MessageServices, $q) {
     }
 
     function userRoleIs(role) {
+        result = false;
         var sessionRole = sessionStorage.getItem("Role");
-        if (role === sessionRole) {
+        var datas = JSON.parse(sessionRole);
+        if (datas !== null) {
+            datas.forEach(x => {
+                if (x.toLowerCase() === role.toLowerCase())
+                    result = true;
+            });
+        }
+       
+       
+        if (result) {
             return true;
         } else {
             $state.go('login');
         }
        
+    }
+
+    function roleIs(data) {
+        var sessionRole = sessionStorage.getItem("Role");
+        var datas = JSON.parse(sessionRole);
+        result = false;
+        if (datas !== null) {
+            datas.forEach(x => {
+                if (x.toLowerCase() === data.toLowerCase())
+                    result = true;
+            });
+        }
+        return result;
+
     }
 
     function getUserAgentProfile() {

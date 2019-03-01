@@ -18,8 +18,16 @@ namespace TrireksaTracingApps.Views
 		public TracingView ()
 		{
 			InitializeComponent ();
-            BindingContext = new TracingViewModel();
+            TracingViewModel vm;
+            BindingContext =vm = new TracingViewModel();
+            vm.OnSearch += Vm_OnSearch;
 
+        }
+
+        private async void Vm_OnSearch(object sender, EventArgs e)
+        {
+            var resultData = sender as stt;
+            await Navigation.PushAsync(new TrackingDetail(resultData));
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
@@ -75,6 +83,9 @@ namespace TrireksaTracingApps.Views
 
     public class TracingViewModel:BaseViewModel
     {
+
+
+        public event EventHandler OnSearch;
         private string _stt;
         public string STT
         {
@@ -114,9 +125,15 @@ namespace TrireksaTracingApps.Views
             return true;
         }
 
-        private void SearchAction(object obj)
+        private async void SearchAction(object obj)
         {
-            throw new NotImplementedException();
+            var data = await ManifestServices.FindSTT(STT);
+            if (data != null && OnSearch != null)
+                OnSearch(data, new EventArgs());
+            else
+            {
+                Helper.ShowMessageError("Data Tidak Ditemukan");
+            }
         }
 
         internal async Task<stt> Find(string v1, string v2)

@@ -14,5 +14,6 @@ namespace TrireksaTracingApps.Services
         Task<T> GetItemAsync(string id);
         Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false);
         Task<stt> FindSTT(int agentId, string stt);
+        Task<stt> FindSTT(string stt);
     }
 }

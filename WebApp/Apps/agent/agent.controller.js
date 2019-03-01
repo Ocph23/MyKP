@@ -31,7 +31,7 @@ function AgentHomeController($scope, AuthServices, AgentHomeService, $state) {
 
 }
 
-function AgentManifestController($scope, AuthServices, ManifestServices, AgentHomeService) {
+function AgentManifestController($scope, AuthServices, ManifestServices, AgentHomeService,MessageServices) {
     AuthServices.userRoleIs("Agent");
 
     $scope.Datas = [];
@@ -42,6 +42,16 @@ function AgentManifestController($scope, AuthServices, ManifestServices, AgentHo
             $scope.Saved = true;
         });
     };
+
+    $scope.SelectItem = function (item) {
+        $scope.SelectedItem = item;
+    }
+
+    $scope.delete = function (data) {
+        ManifestServices.delete(data).then(function (response) {
+            MessageServices.success("Data Berhasil Dihapus");
+        });
+    }
 }
 
 function AgentCreateManifestController($scope, AuthServices, ManifestServices, AgentHomeService,CityServices,$stateParams) {
@@ -81,15 +91,16 @@ function AgentCreateManifestController($scope, AuthServices, ManifestServices, A
             manifest.AgentAdminId = AgentHomeService.getUserProfile().Id;
             ManifestServices.post(manifest).then(function (response) {
                 manifest.Id = response.Id;
+                $scope.model = manifest;
                 $scope.Saved = true;
             });
         } else {
             ManifestServices.update(manifest).then(function (response) {
 
             });
-
             $scope.data = {};
         }
+    
       
     };
 
@@ -100,14 +111,16 @@ function AgentCreateManifestController($scope, AuthServices, ManifestServices, A
             item.CityId = item.City.Id;
             ManifestServices.addNewItem(item.ManifestId, item).then(function (response) {
                 $scope.model.Items.push(response.data);
+                $scope.data = {};
             });
-            item = {};
+          
         } else {
             item.CityId = item.City.Id;
             ManifestServices.updateItem(item.ManifestId, item).then(function (data) {
-                
+                $scope.data = {};
             });
         }
+
     };
 
 

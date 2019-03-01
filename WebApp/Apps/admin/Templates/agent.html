@@ -10,7 +10,7 @@
                 </button> <a class="navbar-brand">Daftar Agen</a>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="navbar-nav ml-md-auto">
-                        <li class="nav-item active">
+                        <li ng-if="AuthServices.roleIs('Admin')" class="nav-item active">
                             <a data-target="#modal-container-825517" role="button" data-toggle="modal" class="nav-link" href="" ng-click="model=null"><i class="fas fa-plus-circle fa-2x  text-success"></i> <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item active">
@@ -44,10 +44,10 @@
                         <td>{{item.Telepon}}</td>
                         <td>{{item.Handphone}}</td>
                         <td class="text-right no-print">
-                            <a ng-click="SelectedItem(item)" data-toggle="modal" data-target="#exampleModalCenter" href=""><i class="fas fa-trash    text-danger"></i></a>
-                            <a ng-click="EditItem(item)" data-target="#modal-container-825517" role="button" data-toggle="modal" href=""><i class="fas fa-edit   text-info"></i></a>
-                            <a ui-sref="usermanage({data:item})"><i class="fas fa-users  "></i></a>
-                            <a ui-sref="prices({data:item})" ><i class="fas fa-coins    text-warning "></i></a>
+                            <a ng-if="AuthServices.roleIs('Admin')" ng-click="SelectedItem(item)" data-toggle="modal" data-target="#exampleModalCenter" href=""><i class="fas fa-trash    text-danger"></i></a>
+                            <a ng-if="AuthServices.roleIs('Admin')" ng-click="EditItem(item)" data-target="#modal-container-825517" role="button" data-toggle="modal" href=""><i class="fas fa-edit   text-info"></i></a>
+                            <a ng-if="AuthServices.roleIs('Admin')" ui-sref="usermanage({data:item})"><i class="fas fa-users"></i></a>
+                            <a ng-if="!AuthServices.roleIs('Courier')" ui-sref="prices({data:item})" ><i class="fas fa-coins    text-warning "></i></a>
                         </td>
                     </tr>
                 </tbody>

@@ -46,19 +46,27 @@
                 </StackLayout>
             </ScrollView>
             <StackLayout Margin="20" Grid.Row="1">
-                <Entry HorizontalOptions="FillAndExpand" Placeholder="Diterima Oleh"></Entry>
-                <Entry HeightRequest="100" HorizontalOptions="FillAndExpand" Placeholder="Keterangan"></Entry>
+                <Entry Text="{Binding Model.Status.RecieverName}" HorizontalOptions="FillAndExpand" Placeholder="Diterima Oleh"></Entry>
+                <Entry Text="{Binding Model.Status.RecieverCondition}" HeightRequest="100" HorizontalOptions="FillAndExpand" Placeholder="Keterangan"></Entry>
                 <StackLayout>
-                    <Label Text="Tanda Tangan"/>
-                    <Image Source="{Binding Sign}" HorizontalOptions="Start" WidthRequest="210" HeightRequest="100" VerticalOptions="StartAndExpand" BackgroundColor="Red">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SignCommand}"/>
-                        </Image.GestureRecognizers>
-                    </Image>
+                    <Label Text="Tanda Tangan">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SignCommand}"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <StackLayout WidthRequest="200" HeightRequest="100" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"
+                                 BackgroundColor="WhiteSmoke" Opacity="0.9">
+                        <Image Source="{Binding Sign}" Aspect="Fill" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SignCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+                   
                 </StackLayout>
             </StackLayout>
             <StackLayout Margin="5" Grid.Row="2">
-                <Button HorizontalOptions="End" WidthRequest="100" Text="Simpan"/>
+                <Button HorizontalOptions="End" WidthRequest="100" Text="Simpan" Command="{Binding SaveCommand}"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

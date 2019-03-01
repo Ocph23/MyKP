@@ -141,7 +141,24 @@ namespace WebApp.Controllers
         {
             try
             {
+                
                 return Ok(context.Find(id, stt));
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("api/manifest/FindBySTT")]
+        public IHttpActionResult FindBySTT(string stt)
+        {
+            try
+            {
+                
+                return Ok(context.FindBySTT(stt));
             }
             catch (Exception ex)
             {

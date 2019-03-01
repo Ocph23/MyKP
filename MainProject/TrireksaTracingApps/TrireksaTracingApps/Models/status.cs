@@ -60,7 +60,7 @@ namespace TrireksaTracingApps.Models
           }
 
         public petugas Courier { get; set; }
-        public byte[] Sign { get; internal set; }
+        public byte[] Sign { get;  set; }
 
         private int  _id;
            private string  _recievername;

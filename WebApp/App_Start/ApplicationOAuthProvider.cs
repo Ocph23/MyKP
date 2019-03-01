@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity;
 using DataAccesLayer;
 using DataAccesLayer.UnitOfWork;
 using System.Web.Routing;
+using Newtonsoft.Json;
 
 namespace WebApp.App_Start
 {
@@ -161,7 +162,7 @@ namespace WebApp.App_Start
             };
 
             if (roles != null && roles.Count > 0)
-                data.Add("roles", roles[0]);
+                data.Add("roles",  JsonConvert.SerializeObject(roles.ToArray()));
             return new AuthenticationProperties(data);
         }
     }

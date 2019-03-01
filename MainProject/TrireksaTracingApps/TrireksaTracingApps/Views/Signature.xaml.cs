@@ -18,39 +18,23 @@ namespace TrireksaTracingApps.Views
 		{
 			InitializeComponent ();
             signatureView.CaptionText = "Tanda Tangan Disini";
-            tcs = new System.Threading.Tasks.TaskCompletionSource<bool>();
         }
 
         public Stream ResultValue { get; private set; }
-        public ImageSource Sign { get; set; }
+      
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            //ResultValue = await signatureView.GetImageStreamAsync(SignatureImageFormat.Jpeg);
-            //Sign = ImageSource.FromStream(() => { return ResultValue; });
+            ResultValue = await signatureView.GetImageStreamAsync(SignatureImageFormat.Jpeg);
+          
+            
+            if (OnSign != null)
+                OnSign(ResultValue, new EventArgs());
             await Navigation.PopModalAsync();
         }
 
 
-
-        public Task PageClosedTask { get { return tcs.Task; } }
-
-        private TaskCompletionSource<bool> tcs { get; set; }
-
+        public event EventHandler OnSign;
      
-        // Either override OnDisappearing 
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            tcs.SetResult(true);
-        }
-
-        // Or provide your own PopAsync function so that when you decide to leave the page explicitly the TaskCompletion is triggered
-        public async Task PopAwaitableAsync()
-        {
-            await Navigation.PopAsync();
-            tcs.SetResult(true);
-        }
-
     }
 }

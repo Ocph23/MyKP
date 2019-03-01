@@ -5,9 +5,77 @@ angular.module("admin.services", [])
  
     .factory('AdminManageWorkerService', AdminManageWorkerService)
     .factory('InvoiceServices', InvoiceServices)
+    .factory('AdminDashboardServices',AdminDashboardServices)
 ;
 
+function AdminDashboardServices($http, MessageServices,$q) {
+    return {
+        invoiceCount: invoiceCount, manifestCount: manifestCount,
+        sttNotHaveStatus: sttNotHaveStatus, invoiceDeadline: invoiceDeadline
+    };
 
+
+    function invoiceCount() {
+        var deffer = $q.defer();
+        $http({
+            method: 'Get',
+            url: 'api/AdminDashboard/InvoiceCount'
+        }).then(function (response) {
+            deffer.resolve(response.data);
+        }, function (error) {
+            deffer.reject();
+            MessageServices.warning(error.data.Message);
+        });
+
+        return deffer.promise;
+    }
+
+    function manifestCount() {
+        var deffer = $q.defer();
+        $http({
+            method: 'Get',
+            url: 'api/AdminDashboard/ManifestCount'
+        }).then(function (response) {
+            deffer.resolve(response.data);
+        }, function (error) {
+            deffer.reject();
+            MessageServices.warning(error.data.Message);
+        });
+
+        return deffer.promise;
+    }
+
+    function sttNotHaveStatus() {
+        var deffer = $q.defer();
+        $http({
+            method: 'Get',
+            url: 'api/AdminDashboard/STTNotHaveStatus' 
+        }).then(function (response) {
+            deffer.resolve(response.data);
+        }, function (error) {
+            deffer.reject();
+            MessageServices.warning(error.data.Message);
+        });
+
+        return deffer.promise;
+    }
+
+    function invoiceDeadline() {
+        var deffer = $q.defer();
+        $http({
+            method: 'Get',
+            url: 'api/AdminDashboard/InvoiceDeadLine'
+        }).then(function (response) {
+            deffer.resolve(response.data);
+        }, function (error) {
+            deffer.reject();
+            MessageServices.warning(error.data.Message);
+        });
+
+        return deffer.promise;
+    }
+
+}
 
 function AdminService($http, $state, $rootScope, $q, MessageServices) {
     var service = {};

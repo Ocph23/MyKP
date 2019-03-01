@@ -11,7 +11,7 @@ namespace TrireksaTracingApps
 {
     public class Helper
     {
-        private static string _server = "http://192.168.1.2/";
+        private static string _server = "http://192.168.1.6/";
 
         public static async Task<AuthenticationToken> GetToken()
         {

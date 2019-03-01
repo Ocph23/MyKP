@@ -30,6 +30,10 @@ namespace DataAccesLayer
         public IRepository<invoiceitem> InvoiceItems { get { return new Repository<invoiceitem>(this); } }
         public IRepository<pembayaran> Payments{ get { return new Repository<pembayaran>(this); } }
 
+        public IRepository<role> Roles { get { return new Repository<role>(this); } }
+
+        public IRepository<userrole> UserRoles { get { return new Repository<userrole>(this); } }
+
 
 
 

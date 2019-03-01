@@ -76,8 +76,7 @@ using Ocph.DAL;
             set { role = value; }
         }
 
-
-
+        public List<role> Roles { get; set; }
 
         private int  _id;
            private string  _name;

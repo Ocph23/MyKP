@@ -12,6 +12,7 @@
             <li>
                 <a ui-sref="dashboard">Dashboard</a>
             </li>
+           
             <li>
                 <div> <a ui-sref="adminfind">Cari ..</a></div>
             </li>
@@ -21,10 +22,10 @@
             <li>
                 <a ui-sref="cities">Kota Tujuan</a>
             </li>
-            <li>
+            <li ng-if="AuthServices.roleIs('Admin')">
                 <a ui-sref="petugas">Petugas</a>
             </li>
-            <li>
+            <li ng-if="AuthServices.roleIs('Accounting')">
                 <a href="" role="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     Invoice
                 </a>

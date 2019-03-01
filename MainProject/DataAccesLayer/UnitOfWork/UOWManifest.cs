@@ -1,6 +1,7 @@
 ﻿using DataAccesLayer.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,6 +61,10 @@ namespace DataAccesLayer.UnitOfWork
                                      }).ToList();
 
                         item.User = db.AgentAdmins.Where(O => O.AgentId == item.AgentId).FirstOrDefault();
+                        foreach(var data in item.Items)
+                        {
+                            data.Status = db.Statuses.Where(O => O.STTId == data.Id).FirstOrDefault();
+                        }
                         return item;
                     }
 
@@ -120,7 +125,10 @@ namespace DataAccesLayer.UnitOfWork
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.CommandText = "newmanifest";
                     var result = command.ExecuteReader();
-                    var datas = Ocph.DAL.Mapping.MySql.MappingProperties<manifest>.MappingTable(result);
+                    DataTable dataTable =  new DataTable();
+                    dataTable.Load(result);
+                    //  var datas = Ocph.DAL.Mapping.MySql.MappingProperties<manifest>.MappingTable(result);
+                    var datas = Helper.DataTableToJsonArray(dataTable);
                     return datas;
 
                 }
@@ -195,7 +203,7 @@ namespace DataAccesLayer.UnitOfWork
                                            select new status
                                            {
                                                CourierId = a.CourierId,
-                                               Id = a.Id,
+                                               Id = a.Id,  Sign=a.Sign,
                                                RecieveCondition = a.RecieveCondition,
                                                RecieveDate = a.RecieveDate,
                                                RecieverName = a.RecieverName,
@@ -258,8 +266,8 @@ namespace DataAccesLayer.UnitOfWork
                     {
                         item.Status = (from a in  db.Statuses.Where(O => O.STTId == item.Id)
                                         join b in db.Workers.Select() on a.CourierId equals b.Id
-                                        select new status { CourierId=a.CourierId, Id=a.Id, RecieveCondition=a.RecieveCondition,
-                                            RecieveDate =a.RecieveDate, RecieverName=a.RecieverName, STTId=a.STTId , Courier=b}
+                                        select new status { CourierId=a.CourierId, Id=a.Id, Sign=a.Sign, RecieveCondition=a.RecieveCondition,
+                                            RecieveDate =a.RecieveDate,  RecieverName=a.RecieverName, STTId=a.STTId , Courier=b}
                                        
                                        ).FirstOrDefault();
                     }
@@ -268,6 +276,66 @@ namespace DataAccesLayer.UnitOfWork
                     var dataResult= datas.ToList();
                     if (dataResult.Count > 0)
                         return dataResult;
+                    throw new SystemException("Data Tidak Ditemukan");
+                }
+                catch (Exception ex)
+                {
+                    throw new SystemException(ex.Message);
+                }
+            }
+        }
+
+        public stt FindBySTT(string stt)
+        {
+            using (var db = new OcphDbContext())
+            {
+                try
+                {
+                    var result = from b in db.STT.Where(O=>O.STT==stt)
+                                 join c in db.Cities.Select() on b.CityId equals c.Id
+                                 join d in db.Manifests.Select() on b.ManifestId equals d.Id
+                                 select new stt
+                                 {
+                                     CityId = b.CityId,
+                                     ShippingBy = b.ShippingBy,
+                                     Id = b.Id,
+                                     ManifestId = b.ManifestId,
+                                     Pcs = b.Pcs,
+                                     Reciever = b.Reciever,
+                                     RecieverAddress = b.RecieverAddress,
+                                     Shiper = b.Shiper,
+                                     ShiperAddress = b.ShiperAddress,
+                                     STT = b.STT,
+                                     WeightType = b.WeightType,
+                                     WeightValue = b.WeightValue,
+                                     Manifest=d,
+                                     City = c
+                                 };
+
+                    var datas = result.Where(O => O.STT.Contains(stt)).ToList();
+                    foreach (var item in datas)
+                    {
+                        item.Status = (from a in db.Statuses.Where(O => O.STTId == item.Id)
+                                       join b in db.Workers.Select() on a.CourierId equals b.Id
+                                       select new status
+                                       {
+                                           CourierId = a.CourierId,
+                                           Id = a.Id,
+                                           Sign = a.Sign,
+                                           RecieveCondition = a.RecieveCondition,
+                                           RecieveDate = a.RecieveDate,
+                                           RecieverName = a.RecieverName,
+                                           STTId = a.STTId,
+                                           Courier = b
+                                       }
+
+                                       ).FirstOrDefault();
+                    }
+
+
+                    var dataResult = datas.ToList();
+                    if (dataResult.Count > 0)
+                        return dataResult.FirstOrDefault();
                     throw new SystemException("Data Tidak Ditemukan");
                 }
                 catch (Exception ex)

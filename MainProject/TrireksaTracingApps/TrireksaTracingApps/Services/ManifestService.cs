@@ -37,6 +37,23 @@ namespace TrireksaTracingApps.Services
             }
         }
 
+        public async Task<stt> FindSTT(string stt)
+        {
+            try
+            {
+                using (var res = new RestServices())
+                {
+                    var result = await res.Get<stt>(string.Format("api/manifest/FindBySTT?stt={0}", stt));
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.ShowMessageError(ex.Message);
+                return null;
+            }
+        }
+
         public async Task<manifest> GetItemAsync(string id)
         {
             try

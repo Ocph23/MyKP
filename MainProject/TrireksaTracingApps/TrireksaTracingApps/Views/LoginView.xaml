@@ -5,41 +5,42 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="80*"/>
-                <RowDefinition Height="20*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <StackLayout Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                    <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
+            <ScrollView>
+                <StackLayout Margin="40">
+                    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                         <Image Source="LOGO3rp.png" VerticalOptions="Center" HeightRequest="64" >
                             <Image.GestureRecognizers>
-                                <ClickGestureRecognizer Clicked="ClickGestureRecognizer_Clicked"></ClickGestureRecognizer>
+                                <TapGestureRecognizer Command="{Binding ShowIPCommand}"></TapGestureRecognizer>
                             </Image.GestureRecognizers>
                         </Image>
-                    </ContentView>
+                        <Label Text="INCOMING CARGO">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ShowIPCommand}"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    <StackLayout Spacing="25">
+                        <Label FontSize="Large" HorizontalOptions="Start" Text="LOGIN"></Label>
+                        <Entry  Placeholder="User Name" Text="{Binding UserName}"/>
+                        <Entry IsPassword="True" Placeholder="Password" Text="{Binding Password}"/>
+                        <Label Text="Forgot Password">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer></TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Button Text="Login" Command="{Binding LoginCommand}"></Button>
+                    </StackLayout>
                 </StackLayout>
-            </StackLayout>
-            <Grid Grid.Row="1" Margin="40,10" VerticalOptions="Start">
-                <StackLayout Spacing="25">
-                    <Label FontSize="Large" HorizontalOptions="Start" Text="LOGIN"></Label>
-                    <Entry  Placeholder="User Name" Text="{Binding UserName}"/>
-                    <Entry IsPassword="True" Placeholder="Password" Text="{Binding Password}"/>
-                    <Label Text="Forgot Password">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer></TapGestureRecognizer>
-                        </Label.GestureRecognizers>
-                    </Label>
-                    <Button Text="Login" Command="{Binding LoginCommand}"></Button>
+            </ScrollView>
+            <Grid  Grid.Row="1">
+                <StackLayout x:Name="ipAddress" Orientation="Horizontal" HorizontalOptions="Center" Margin="0,0,0,0">
+                    <Entry WidthRequest="200" Text="{Binding Address}"></Entry>
+                    <Button Command="{Binding HideIPCommand}" WidthRequest="50" Text="OK"></Button>
                 </StackLayout>
             </Grid>
-            <Grid  Grid.Row="2">
-                <StackLayout x:Name="ipAddress" Orientation="Horizontal"  Margin="-300,0,0,0">
-                    <Entry Text="{Binding Address}"></Entry>
-                    <Button Clicked="Button_Clicked" WidthRequest="35" Text="OK"></Button>
-                </StackLayout>
-            </Grid>
-       
         </Grid>
     </ContentPage.Content>
 </ContentPage>

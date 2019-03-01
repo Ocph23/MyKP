@@ -1,28 +1,25 @@
 ﻿
-
 <div class="col-md-12">
     <div id="chart" class="card">
         <div class="card-header">
             <h5>Status Penerimaan</h5>
         </div>
-        <div class="card-body">
+        <div class="card-body" style="min-height:400px">
             <div class="row col-md-12">
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <canvas id="doughnut" class="chart chart-doughnut"
                             chart-colors="colors"
                             chart-data="data" chart-labels="labels"></canvas>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <h3>STT BELUM ADA STATUS PENERIMAAN</h3>
-                    <table class="table" style="height: 50px; overflow: auto;">
-
+                    <table class="table"  style="overflow: auto;">
                         <tr>
                             <th>STT</th>
                             <th>Pengirim</th>
                             <th>Penerima</th>
                             <th>Jumlah</th>
                             <th>Berat</th>
-
                         </tr>
                         <tr ng-repeat="item in SttNotHaveStatus.Datas">
                             <td>{{item.STT}}</td>
@@ -40,7 +37,7 @@
 </div>
 
 <div class="row col-md-12">
-    <div class="col-md-3">
+    <div class="col-md-2">
         <div class="card">
             <div class="card-header">
                 <h5>STT</h5>
@@ -50,33 +47,32 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <div class="card">
             <div class="card-header">
                 <h5>MANIFEST</h5>
             </div>
             <div class="card-body">
-                <h2>{{ManifestCount}} Manifest</h2>
+                <h2>{{ManifestCount}} </h2>
             </div>
         </div>
-
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <div class="card">
             <div class="card-header">
                 <h5>INVOICE</h5>
             </div>
             <div class="card-body">
-                <h2>{{InvoiceCount}} Invoice</h2>
+                <h2>{{InvoiceCount}} </h2>
 
             </div>
         </div>
-
     </div>
-    <div class="col-md-3">
+
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h5>Dead Line</h5>
+                <h5>Invoice Jatuh Tempo</h5>
             </div>
             <div class="card-body">
                 <div ng-repeat="item in InvoiceDeadline">
@@ -89,19 +85,20 @@
 
 </div>
 <style>
-    .card {
-        margin-top: 10px;
-    }
+        .card {
+           margin-top:10px;
+        }
 
     .card-header {
         background-color: #99b433;
     }
 
     .card-body {
-        min-height: 150px;
+        min-height: 100px;
+        text-align:center;
     }
 
     #chart {
-        margin-right: 25px;
+        margin-right: 0px;
     }
 </style>

@@ -18,6 +18,7 @@
                     <th class="priority-2" scope="col">Via</th>
                     <th class="priority-3" scope="col">Jumlah</th>
                     <th class="priority-4" scope="col">Rencana Tiba</th>
+                    <th class="priority-6" scope="col">Diterima</th>
                     <th class="priority-5" scope="col">Admin</th>
                     <th class="print-only" scope="col">QR Kode</th>
                     <th scope="col" class="text-right class=" priority-1""></th>
@@ -26,16 +27,17 @@
             <tbody>
                 <tr ng-repeat="item in Datas">
                     <th class="priority-5" scope="row">{{$index+1}}</th>
-                    <td class="priority-1">{{item.CreateDate|date:'dd MMMM yyyy'}}</td>
-                    <td class="priority-1">{{item.NumberView}}</td>
-                    <td class="priority-2">{{item.PortType}}</td>
-                    <td class="priority-3">{{item.Package}}</td>
-                    <td class="priority-4">{{item.SendedDate|date:'dd MMMM yyyy'}}</td>
-                    <td class="priority-5">{{item.User.Name}}</td>
+                    <td class="priority-1" scope="row">{{item.CreateDate|date:'dd MMMM yyyy'}}</td>
+                    <td class="priority-1" scope="row">{{item.NumberView}}</td>
+                    <td class="priority-2" scope="row">{{item.PortType}}</td>
+                    <td class="priority-3" scope="row">{{item.Package}}</td>
+                    <td class="priority-4" scope="row">{{item.SendedDate|date:'dd MMMM yyyy'}}</td>
+                    <td class="priority-6" scope="row">{{item.RecieveOnPort|date:'dd MMMM yyyy'}}</td>
+                    <td class="priority-5" scope="row">{{item.User.Name}}</td>
                     <td class="print-only"><qrcode data="{{item.CreateDate}}" version="2" error-correction-level="M" color="#fff" background="#000"></qrcode></td>
 
                     <td class="text-right no-print class=" priority-1"">
-                        <a ng-click="SelectedItem(item)" data-toggle="modal" data-target="#exampleModalCenter" href="">
+                        <a ng-if="item.RecieveOnPort===null" ng-click="SelectItem(item)" data-toggle="modal" data-target="#exampleModalCenter" href="">
                             <i class="fas fa-trash  text-danger"></i>
                         </a>
                         <a ui-sref="createmanifest({data:item})">
@@ -110,7 +112,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button ng-click="delete()" data-dismiss="modal" type="button" class="btn btn-danger">Yes</button>
+                <button ng-click="delete(SelectedItem)" data-dismiss="modal" type="button" class="btn btn-danger">Yes</button>
             </div>
         </div>
     </div>

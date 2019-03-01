@@ -16,30 +16,53 @@ namespace TrireksaTracingApps.Views
 		public LoginView ()
 		{
 			InitializeComponent ();
-            BindingContext = new LoginViewModel();
-		}
-
-        private async void ClickGestureRecognizer_Clicked(object sender, EventArgs e)
-        {
-            await ipAddress.TranslateTo(0, 0, 2000, Easing.BounceIn);
+            var vm = new LoginViewModel(); ;
+            BindingContext = vm;
+            vm.HideIP += Vm_HideIP;
+            vm.ShowIP += Vm_ShowIP;
+            ipAddress.TranslateTo(-500, 0, 0, Easing.SinInOut);
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
+        private async void Vm_ShowIP(object sender, EventArgs e)
         {
-            await ipAddress.TranslateTo(-300, 0, 2000, Easing.BounceIn);
+            await ipAddress.TranslateTo(0, 0, 1000, Easing.SinInOut);
         }
+
+        private async void Vm_HideIP(object sender, EventArgs e)
+        {
+           await ipAddress.TranslateTo(-500, 0, 1000, Easing.SinInOut);
+        }
+             
     }
 
     public class LoginViewModel :BaseViewModel
     {
         public ICommand LoginCommand { get; set; }
+        public ICommand ShowIPCommand { get; }
+        public ICommand HideIPCommand { get; }
 
+        public event EventHandler ShowIP;
+        public event EventHandler HideIP;
         public LoginViewModel()
         {
             LoginCommand = new Command(() => LoginAction());
+            ShowIPCommand = new Command(() => ShowIPAction());
+            HideIPCommand = new Command(() => HideIPAction());
         }
 
-       
+        private void HideIPAction()
+        {
+            if (HideIP != null)
+                HideIP(null, new EventArgs());
+            Helper.Server = this.Address;
+        }
+
+        private void ShowIPAction()
+        {
+
+            if (ShowIP != null)
+                ShowIP(null, new EventArgs());
+        }
 
         private async void LoginAction()
         {
@@ -82,10 +105,9 @@ namespace TrireksaTracingApps.Views
         {
             get { return Helper.Server; }
             set {
-                Helper.Server = server;
                 SetProperty(ref server, value); }
         }
-
+                             
     }
 
 }

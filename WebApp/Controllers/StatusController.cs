@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 
 namespace WebApp.Controllers
 {
@@ -44,17 +45,22 @@ namespace WebApp.Controllers
 
 
         // POST: api/Agent
+        [Authorize(Roles = "Courier")]
         public IHttpActionResult Post([FromBody]status value)
         {
             try
             {
+              var userId=  User.Identity.GetUserId();
+                UOWUserProfile userCtx = new UOWUserProfile();
+                var pet = userCtx.GetAdminProfile(userId);
+                value.Courier = pet;
+                value.CourierId = pet.Id;
                 if (value == null)
                     throw new SystemException("Periksa Kembali Data Anda");
                 return Ok(context.post(value));
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }

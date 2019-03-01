@@ -66,7 +66,12 @@ using Ocph.DAL;
                      }
           }
 
+        [DbColumn("Sign")]
+        public byte[] Sign { get { return _sign; } set { _sign = value; } }
+
+
         public petugas Courier { get; set; }
+
 
         private int  _id;
            private string  _recievername;
@@ -74,7 +79,8 @@ using Ocph.DAL;
            private string  _recievecondition;
            private int  _sttid;
            private int  _courierid;
-      }
+        private byte[] _sign;
+    }
 }
 
 

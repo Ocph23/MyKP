@@ -72,6 +72,7 @@
     <Compile Include="Models\pembayaran.cs" />
     <Compile Include="Models\petugas.cs" />
     <Compile Include="Models\price.cs" />
+    <Compile Include="Models\role.cs" />
     <Compile Include="Models\status.cs" />
     <Compile Include="Models\stt.cs" />
     <Compile Include="Models\STTStatus.cs" />
