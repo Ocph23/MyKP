@@ -332,6 +332,8 @@
     <Content Include="bower_components\angular-chart.js\dist\angular-chart.js.tar.gz" />
     <Content Include="bower_components\angular-chart.js\dist\angular-chart.min.js.map" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\trireksaincoming - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\trireksaincoming - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\WebApp20181220095502 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
