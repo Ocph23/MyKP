@@ -144,8 +144,8 @@ namespace WebApp.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "Admin,Courier")]
-        [Route("api/UserProfile/admin")]
+        [Authorize(Roles = "Admin,Accounting,Courier")]
+        [Route("api/UserProfile/GetAdminUserProfile")]
         public IHttpActionResult GetAdminUserProfile()
         {
             try

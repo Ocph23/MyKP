@@ -202,7 +202,6 @@
     <Compile Include="Controllers\AdminDashboardController.cs" />
     <Compile Include="Controllers\AgentController.cs" />
     <Compile Include="Controllers\AgentDashboarController.cs" />
-    <Compile Include="Controllers\AppApiController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
@@ -211,7 +210,6 @@
     <Compile Include="Controllers\ManifestController.cs" />
     <Compile Include="Controllers\PriceController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

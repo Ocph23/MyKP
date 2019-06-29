@@ -536,6 +536,14 @@ function AdminCreateInvoiceController($scope, AdminService, AuthServices, Invoic
             MessageServices.warning("Anda Belum Memilih  item");
         }
     };
+
+
+    $scope.UpdateItem = function (item) {
+        InvoiceServices.updateItem(item.InvoiceId,item).then(function (response) {
+            MessageServices.success("Anda Belum Memilih  item");
+        });
+    }
+
 }
 
 function AdminPrintInvoiceController($scope, $state, $stateParams,MessageServices,TerbilangServices) {

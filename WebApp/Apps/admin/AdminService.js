@@ -357,12 +357,11 @@ function InvoiceServices($http, $q, MessageServices) {
         addNewItem: addNewItem, updateItem: updateItem,verification:verification
     };
 
-
     function verification(model) {
         var deffer = $q.defer();
         $http({
             method: 'Post',
-            url: 'api/Invoice/addpembayaran',
+            url: 'api/Invoice/VerificationPayment',
             data: model
         }).then(function (response) {
             deffer.resolve(response);

@@ -29,7 +29,6 @@ namespace DataAccesLayer.UnitOfWork
             }
         }
 
-
         public agentadmin GetUserProfile(string userid)
         {
             using (var db = new OcphDbContext())
@@ -47,7 +46,6 @@ namespace DataAccesLayer.UnitOfWork
                 }
             }
         }
-
 
         public petugas GetAdminProfile(string userid)
         {

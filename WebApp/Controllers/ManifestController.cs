@@ -108,7 +108,7 @@ namespace WebApp.Controllers
         //updateitem
         [HttpPut]
         [Route("api/manifest/updateitem")]
-        public IHttpActionResult GetSttInfo(int id, stt item)
+        public IHttpActionResult updateitem(int id, stt item)
         {
             try
             {
@@ -137,7 +137,7 @@ namespace WebApp.Controllers
 
         [HttpGet]
         [Route("api/manifest/find")]
-        public IHttpActionResult GetSttInfo(int id, string stt)
+        public IHttpActionResult find(int id, string stt)
         {
             try
             {

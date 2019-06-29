@@ -28,21 +28,7 @@ namespace WebApp.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        [HttpGet]
-        public IHttpActionResult GetInvoiceByNumber(int id)
-        {
-            try
-            {
-                return Ok(context.GetInvoiceByNumber(id));
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-        }
-
+       
 
         // POST: api/Agent
         public IHttpActionResult Post([FromBody]Invoice value)
@@ -78,7 +64,7 @@ namespace WebApp.Controllers
 
 
         [Route("api/invoice/getitems")]
-        public IHttpActionResult GetItems(int id)
+        public IHttpActionResult GetSTTNotPaidByAgentId(int id)
         {
             //id is invoice id
             try
@@ -109,6 +95,7 @@ namespace WebApp.Controllers
             }
         }
 
+        [HttpPut]
         [Route("api/invoice/updateitem")]
         public IHttpActionResult UpdateItem(int id, invoiceitem data)
         {
@@ -164,6 +151,23 @@ namespace WebApp.Controllers
 
         [Route("api/invoice/addpembayaran")]
         public IHttpActionResult AddPembayaran(pembayaran data)
+        {
+            try
+            {
+                if (data == null)
+                    throw new SystemException("Periksa Kembali Data Anda");
+                return Ok(context.Payment(data));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+
+        [Route("api/invoice/VerificationPayment")]
+        public IHttpActionResult VerificationPayment(pembayaran data)
         {
             try
             {

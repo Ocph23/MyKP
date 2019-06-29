@@ -105,7 +105,11 @@ namespace TrireksaTracingApps.Views
         {
             get { return Helper.Server; }
             set {
-                SetProperty(ref server, value); }
+
+                SetProperty(ref server, value);
+                Helper.Server = value;
+            }
+
         }
                              
     }

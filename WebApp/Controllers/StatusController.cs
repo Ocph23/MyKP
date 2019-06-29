@@ -57,6 +57,8 @@ namespace WebApp.Controllers
                 value.CourierId = pet.Id;
                 if (value == null)
                     throw new SystemException("Periksa Kembali Data Anda");
+                if (value.Id > 0)
+                    return Ok(context.Update(value));
                 return Ok(context.post(value));
             }
             catch (Exception ex)

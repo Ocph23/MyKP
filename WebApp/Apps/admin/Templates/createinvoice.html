@@ -51,7 +51,7 @@
                     <div class="col-md-2"></div>
                     <div class="col-md-5">
 
-                      
+
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Biaya Kirim Dokumen</label>
                             <div class="col-sm-8">
@@ -100,7 +100,7 @@
                         <td>{{item.STT.WeightValue}}</td>
                         <td>
                             <a ng-click="SelectedItem(item)" data-toggle="modal" data-target="#exampleModalCenter" href=""><i class="fas fa-trash text-danger"></i></a>
-                            <a ng-click="EditItem(item)" data-target="#modal-container-825517" role="button" data-toggle="modal" href=""><i class="fas fa-edit text-warning"></i></a>
+                            <a ng-click="SelectedItem(item)" data-target="#modal-container-8255" role="button" data-toggle="modal" href=""><i class="fas fa-edit text-warning"></i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -150,13 +150,13 @@
                                     <input class="form-check-input" type="checkbox" ng-model="item.Selected">
                                 </td>
                                 <td>{{item.STT.STT}}</td>
-                                <td >{{item.STT.Reciever}}</td>
+                                <td>{{item.STT.Reciever}}</td>
                                 <td>{{item.STT.ShippingBy}}</td>
                                 <td class="text-right">{{item.STT.PriceValue}}</td>
-                                <td> 
-                                 <input type="number" ng-model="item.OtherCosts" class="form-control w-50" />
+                                <td>
+                                    <input type="number" ng-model="item.OtherCosts" class="form-control w-50" />
                                 </td>
-                                
+
                             </tr>
                         </tbody>
                     </table>
@@ -164,6 +164,62 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     <button ng-click="AddItems(model,Sources)" data-dismiss="modal" type="button" class="btn btn-info">Add</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="col-md-12">
+    <div class="modal fade" id="modal-container-8255" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-lg modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">
+                       Update Data
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">AWB/STT</th>
+                                <th scope="col">Reciever</th>
+
+                                <th scope="col">Via</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Lain-lain</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+
+                                <td>{{Selected.STT.STT}}</td>
+                                <td>{{Selected.STT.Reciever}}</td>
+                                <td>{{Selected.STT.ShippingBy}}</td>
+                                <td>
+                                    <input type="number" ng-model="Selected.Price" class="form-control w-50" />
+                                </td>
+                                <td>
+                                    <input type="number" ng-model="Selected.OtherCosts" class="form-control w-50" />
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button ng-click="UpdateItem(Selected)" data-dismiss="modal" type="button" class="btn btn-info">Save</button>
                 </div>
             </div>
 

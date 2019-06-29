@@ -210,7 +210,7 @@ function AuthServices($http, $state, $rootScope, MessageServices, $q) {
         $http({
             headers: getHeaders(),
             method: 'Get',
-            url: '/api/UserProfile/admin'
+            url: '/api/UserProfile/GetAdminUserProfile'
         }).then(function (response) {
             defer.resolve(response.data);
             sessionStorage.setItem("UserProfile", JSON.stringify(response.data));

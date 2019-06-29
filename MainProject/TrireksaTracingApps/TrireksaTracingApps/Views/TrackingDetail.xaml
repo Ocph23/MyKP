@@ -47,7 +47,7 @@
             </ScrollView>
             <StackLayout Margin="20" Grid.Row="1">
                 <Entry Text="{Binding Model.Status.RecieverName}" HorizontalOptions="FillAndExpand" Placeholder="Diterima Oleh"></Entry>
-                <Entry Text="{Binding Model.Status.RecieverCondition}" HeightRequest="100" HorizontalOptions="FillAndExpand" Placeholder="Keterangan"></Entry>
+                <Entry Text="{Binding Model.Status.RecieveCondition}" HeightRequest="100" HorizontalOptions="FillAndExpand" Placeholder="Keterangan"></Entry>
                 <StackLayout>
                     <Label Text="Tanda Tangan">
                         <Label.GestureRecognizers>
@@ -56,7 +56,7 @@
                     </Label>
                     <StackLayout WidthRequest="200" HeightRequest="100" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"
                                  BackgroundColor="WhiteSmoke" Opacity="0.9">
-                        <Image Source="{Binding Sign}" Aspect="Fill" >
+                        <Image Source="{Binding Sign}" Aspect="AspectFit" >
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding SignCommand}"/>
                             </Image.GestureRecognizers>

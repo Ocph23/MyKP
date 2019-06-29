@@ -34,8 +34,6 @@ namespace DataAccesLayer.Models
         [DbColumn("SendInvoiceCost")]
         public double SendInvoiceCost { get; set; }
 
-       
-
         [DbColumn("Tax")]
         public double Tax { get; set; }
 

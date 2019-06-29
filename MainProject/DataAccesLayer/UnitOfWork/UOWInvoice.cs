@@ -80,10 +80,7 @@ namespace DataAccesLayer.UnitOfWork
             }
         }
 
-        public object GetInvoiceByNumber(int id)
-        {
-            throw new NotImplementedException();
-        }
+      
 
         public Invoice Create(Invoice value)
         {

@@ -14,8 +14,8 @@ namespace DataAccesLayer
     {
         public OcphDbContext()
         {
-         // ConnectionString = "Server=localhost;database=dbtrireksaincoming;UID=root;password=;CharSet=utf8;Persist Security Info=True";
-          ConnectionString = "Server=den1.mysql3.gear.host;database=trireksaincoming;UID=trireksaincoming;password=Sony@77;CharSet=utf8;Persist Security Info=True";
+         ConnectionString = "Server=localhost;database=dbtrireksaincoming;UID=root;password=;CharSet=utf8;Persist Security Info=True";
+         // ConnectionString = "Server=den1.mysql3.gear.host;database=trireksaincoming;UID=trireksaincoming;password=Sony@77;CharSet=utf8;Persist Security Info=True";
         }
 
         public IRepository<manifest> Manifests { get { return new Repository<manifest>(this); } }

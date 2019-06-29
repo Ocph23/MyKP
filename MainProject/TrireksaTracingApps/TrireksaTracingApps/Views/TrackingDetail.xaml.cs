@@ -61,12 +61,13 @@ namespace TrireksaTracingApps.Views
             }
         }
 
-        public byte[] ReadFully(Stream imagesource)
+        public byte[] ReadFully(MemoryStream imagesource)
         {
             byte[] ImageBytes;
             using (var memoryStream = new System.IO.MemoryStream())
             {
                 imagesource.CopyTo(memoryStream);
+                memoryStream.ToArray();
                 ImageBytes = memoryStream.ToArray();
             }
             return ImageBytes;
@@ -90,10 +91,10 @@ namespace TrireksaTracingApps.Views
 
         private void Page_OnSign(object sender, EventArgs e)
         {
-            Stream result = sender as Stream;
+            MemoryStream result = sender as MemoryStream;
             if (result != null)
             {
-                Model.Status.Sign = ReadFully(result);
+                Model.Status.Sign = result.ToArray();
                 Sign = ImageSource.FromStream(() => { return result; });
             }
         }
