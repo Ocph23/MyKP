@@ -125,7 +125,7 @@ namespace WebApp.App_Start
             {
                 context.AdditionalResponseParameters.Add(property.Key, property.Value);
             }
-            return Task.FromResult<object>(null);
+            return Task.FromResult<object>(context);
         }
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
@@ -162,7 +162,7 @@ namespace WebApp.App_Start
             };
 
             if (roles != null && roles.Count > 0)
-                data.Add("roles",  JsonConvert.SerializeObject(roles.ToArray()));
+                data.Add("roles",  JsonConvert.SerializeObject(roles));
             return new AuthenticationProperties(data);
         }
     }

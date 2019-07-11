@@ -75,7 +75,7 @@ function ManifestServices($http, AuthServices, $q, MessageServices) {
     var datas = [];
 
     return {
-        get: get, getByManifestById: getByManifestById, post: post, delete: deleteItem, update: update,
+        get: get, post: post, delete: deleteManifest, update: update, getByManifestById: getByManifestById, deleteItem:deleteItem,
         addNewItem: addNewItem, updateItem: updateItem, find: findSTT, findbyManifestNumber: findbyManifestNumber
     };
 
@@ -137,6 +137,28 @@ function ManifestServices($http, AuthServices, $q, MessageServices) {
         return deffer.promise;
     }
 
+
+
+
+    function deleteManifest(model) {
+        var deffer = $q.defer();
+        $http({
+            method: 'Delete',
+            url: 'api/manifest/' + model.Id
+        }).then(function (response) {
+            var index = datas.indexOf(model);
+            datas.splice(index, 1);
+            deffer.resolve(response);
+        }, function (error) {
+            deffer.reject();
+            MessageServices.error(error.data.Message);
+        });
+
+        return deffer.promise;
+    }
+
+
+
     function addNewItem(id,model) {
         var deffer = $q.defer();
         $http({
@@ -176,11 +198,9 @@ function ManifestServices($http, AuthServices, $q, MessageServices) {
         var deffer = $q.defer();
         $http({
             method: 'Delete',
-            url: 'api/manifest/' + model.Id
+            url: 'api/manifest/deleteitem?id=' + model.Id
         }).then(function (response) {
-            var index = datas.indexOf(model);
-            datas.splice(index, 1);
-            deffer.resolve(response);
+            deffer.resolve(response.data);
         }, function (error) {
             deffer.reject();
             MessageServices.error(error.data.Message);
@@ -199,6 +219,7 @@ function ManifestServices($http, AuthServices, $q, MessageServices) {
             data: model
         }).then(function (response) {
             deffer.resolve(response);
+            MessageServices.info("Success");
         }, function (error) {
             deffer.reject();
             MessageServices.error(error.data.Message);

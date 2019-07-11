@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,9 @@ namespace DataAccesLayer
     {
         public OcphDbContext()
         {
-         ConnectionString = "Server=localhost;database=dbtrireksaincoming;UID=root;password=;CharSet=utf8;Persist Security Info=True";
+
+         ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+       //  ConnectionString = "Server=localhost;database=dbtrireksaincoming;UID=root;password=;CharSet=utf8;Persist Security Info=True";
          // ConnectionString = "Server=den1.mysql3.gear.host;database=trireksaincoming;UID=trireksaincoming;password=Sony@77;CharSet=utf8;Persist Security Info=True";
         }
 

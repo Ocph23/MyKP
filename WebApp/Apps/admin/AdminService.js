@@ -266,7 +266,7 @@ function AdminManageWorkerService($http,  $q,MessageServices) {
 
 function AdminManageUserService($http,MessageServices, $q) {
     var service = {};
-    var datas = [];
+    service.datas = [];
 
     return {
         get: get, post: post, delete: deleteItem, update: update
@@ -278,11 +278,9 @@ function AdminManageUserService($http,MessageServices, $q) {
             method: 'Get',
             url: 'agent/AgentUsers?agentId=' + agentId
         }).then(function (response) {
-            instance = true;
-            response.data.forEach(item => {
-                datas.push(item);
-            });
-            deffer.resolve(datas);
+            service.instance = true;
+            service.datas = response.data;
+            deffer.resolve(service.datas);
         }, function (error) {
             deffer.reject();
             MessageServices.warning(error.data.Message);
@@ -299,7 +297,9 @@ function AdminManageUserService($http,MessageServices, $q) {
             data: model
         }).then(function (response) {
             datas.push(response.data);
+
             deffer.resolve(response);
+            MessageServices.warning(error.data.Message);
         }, function (error) {
             deffer.reject();
             MessageServices.warning(error.data.Message);
@@ -326,8 +326,6 @@ function AdminManageUserService($http,MessageServices, $q) {
 
         return deffer.promise;
     }
-
-
 
 
     function update(model) {

@@ -78,7 +78,7 @@ function AdminAgentController($scope, AdminService, MessageServices, AdminManage
     $scope.SaveAgent = function (data) {
         if (data.AgentId === undefined) {
             AdminService.post(data).then(function (response) {
-                $scope.Datas.push(response);
+                MessageServices.info("Success");
             });
         } else {
             AdminService.update(data).then(function (response) {
@@ -132,7 +132,7 @@ function AdminUserManageController($scope, $stateParams, $state, MessageServices
         if (data.AgentId === undefined) {
             
             AdminManageUserService.post($scope.Agent.AgentId,data).then(function (response) {
-                $scope.Datas.push(response);
+                MessageServices.info("Success");
             });
         } else {
             AdminManageUserService.update(data).then(function (response) {

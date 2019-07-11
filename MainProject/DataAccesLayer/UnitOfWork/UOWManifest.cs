@@ -353,8 +353,8 @@ namespace DataAccesLayer.UnitOfWork
                 {
 
                    var deleted = db.STT.Delete(O=>O.Id==sttId);
-                    if (deleted)
-                        throw new SystemException("Data tidak tersimpan");
+                    if (!deleted)
+                        throw new SystemException("Data tidak berhasil dihapus");
                     else
                         return true;
                 }

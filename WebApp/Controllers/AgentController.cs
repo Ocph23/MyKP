@@ -158,7 +158,7 @@ namespace WebApp.Controllers
                     var user = agentContext.AddNewUser(agentId, item);
                     if (user != null)
                     {
-                        return Ok(agentContext.AddNewUser(agentId, item));
+                        return Ok(user);
                     }
                 }
                 throw new SystemException("User Tidak Berhasil Ditambah");

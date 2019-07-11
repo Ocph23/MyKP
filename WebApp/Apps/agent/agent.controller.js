@@ -90,7 +90,8 @@ function AgentCreateManifestController($scope, AuthServices, ManifestServices, A
             manifest.AgentId = $scope.Agent.AgentId;
             manifest.AgentAdminId = AgentHomeService.getUserProfile().Id;
             ManifestServices.post(manifest).then(function (response) {
-                manifest.Id = response.Id;
+                manifest.Id = response.data.Id;
+                manifest.Items = [];
                 $scope.model = manifest;
                 $scope.Saved = true;
             });
@@ -129,16 +130,35 @@ function AgentCreateManifestController($scope, AuthServices, ManifestServices, A
     };
 
 
+    $scope.SelectedData= function (item) {
+        $scope.SelectedDataItem = item;
+    };
+
+
     $scope.EditItem = function (item) {
         $scope.data = item;
     };
 
-    $scope.delete = function () {
+
+
+
+    $scope.deleteManifest = function () {
         if ($scope.Selected !== undefined || $scope.Selected !== null) {
-            ManifestServices.delete($scope.Selected).then(function (response) {
+            ManifestServices.deleteManifest($scope.Selected).then(function (response) {
                 var index = $scope.model.Items.indexOf($scope.Selected);
                 $scope.model.Item.slice(index, 1);
                 $scope.Selected = {};
+            });
+        }
+    };
+
+
+    $scope.delete = function () {
+        if ($scope.SelectedDataItem !== undefined || $scope.SelectedDataItem !== null) {
+            ManifestServices.deleteItem($scope.SelectedDataItem).then(function (response) {
+                var index = $scope.model.Items.indexOf($scope.SelectedDataItem);
+                $scope.model.Items.splice(index, 1);
+                $scope.SelectedDataItem = {};
             });
         }
     };
