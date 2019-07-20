@@ -283,9 +283,18 @@
     <Content Include="Images\Logopng.png" />
     <Content Include="Images\trireksa.ico" />
     <Content Include="Memo.txt" />
+    <Content Include="node_modules\angular-barcode\dist\angular-barcode.js" />
     <Content Include="node_modules\angular-qrcode\angular-qrcode.js" />
+    <Content Include="node_modules\angular-qrcode\LICENCE.txt" />
     <Content Include="node_modules\qrcode-generator\qrcode.js" />
+    <Content Include="node_modules\qrcode-generator\qrcode_SJIS.js" />
     <Content Include="node_modules\qrcode-generator\qrcode_UTF8.js" />
+    <Content Include="node_modules\sweetalert2\dist\sweetalert2.all.js" />
+    <Content Include="node_modules\sweetalert2\dist\sweetalert2.all.min.js" />
+    <Content Include="node_modules\sweetalert2\dist\sweetalert2.css" />
+    <Content Include="node_modules\sweetalert2\dist\sweetalert2.js" />
+    <Content Include="node_modules\sweetalert2\dist\sweetalert2.min.css" />
+    <Content Include="node_modules\sweetalert2\dist\sweetalert2.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
@@ -330,6 +339,9 @@
     <Content Include="bower.json" />
     <Content Include="bower_components\angular-chart.js\dist\angular-chart.js.tar.gz" />
     <Content Include="bower_components\angular-chart.js\dist\angular-chart.min.js.map" />
+    <Content Include="node_modules\angular-qrcode\package.json" />
+    <Content Include="node_modules\angular-qrcode\README.md" />
+    <Content Include="node_modules\angular-barcode\dist\angular-barcode.js.map" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\trireksaincoming - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\trireksaincoming - Web Deploy.pubxml" />
@@ -418,16 +430,16 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MainProject\DataAccesLayer\DataAccesLayer.csproj">
-      <Project>{adbc34c9-c64a-4fd6-8f1e-9162648a4d6c}</Project>
-      <Name>DataAccesLayer</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MainProject\DataAccesLayer\DataAccesLayer.csproj">
+      <Project>{adbc34c9-c64a-4fd6-8f1e-9162648a4d6c}</Project>
+      <Name>DataAccesLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

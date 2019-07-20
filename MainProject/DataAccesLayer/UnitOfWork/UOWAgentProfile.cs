@@ -104,14 +104,21 @@ namespace DataAccesLayer.UnitOfWork
                     {
                         foreach(var data in item.Roles )
                         {
-                            var r = db.Roles.Where(O => O.Name == data.Name).FirstOrDefault();
-                            if(r !=null & data.Id=="0")
+                            role r = db.Roles.Where(O => O.Name == data.Name).FirstOrDefault();
+                            if(r==null)
                             {
-                                data.Id = r.Id;
-                               if(!db.UserRoles.Insert(new userrole { RoleId=r.Id, UserId=item.UserId }))
-                                    throw new SystemException("Tidak Berhasil Tambah Petugas");
+                               var roleid= db.Roles.Insert(new role { Name = data.Name , Id=data.Name+"123"});
+                                r = db.Roles.Where(O => O.Name == data.Name).FirstOrDefault();
                             }
 
+                  
+
+                            if(db.UserRoles.Where(x=>x.UserId==item.UserId && x.RoleId==r.Id).Count()<=0)
+                            {
+                                if (!db.UserRoles.Insert(new userrole { RoleId = r.Id, UserId = item.UserId }))
+                                    throw new SystemException("Tidak Berhasil Role Petugas");
+                            }
+                            
                             if(r!=null & data.Id=="-1")
                             {
                                 if(!db.UserRoles.Delete(O=>O.UserId==item.UserId && O.RoleId== r.Id))

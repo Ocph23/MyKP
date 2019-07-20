@@ -297,6 +297,9 @@ function AdminFindController($scope,AdminService, AuthServices, ManifestServices
         } else {
 
             ManifestServices.findbyManifestNumber(item.Agent.AgentId, item).then(function (data) {
+                data.Items.forEach(x => {
+                    x.BarCode = data.AgentId + ";" + x.STT;
+                })
                 $scope.Manifest = data;
             });
         }
@@ -319,6 +322,31 @@ function AdminFindController($scope,AdminService, AuthServices, ManifestServices
             StatusServices.update(model.Status);
         }
     };
+
+
+
+    $scope.bc = {
+        format: 'CODE128',
+        lineColor: '#000000',
+        width: 2,
+        height: 35,
+      //  displayValue: true,
+        fontOptions: '',
+        font: 'monospace',
+        textAlign: 'center',
+        textPosition: 'bottom',
+        textMargin: 2,
+        fontSize: 20,
+        background: '#ffffff',
+        margin: 0,
+        marginTop: undefined,
+        marginBottom: undefined,
+        marginLeft: undefined,
+        marginRight: undefined,
+        valid: function (valid) {
+        }
+    }
+
 
 
 }

@@ -8,12 +8,12 @@ namespace DataAccesLayer.Models
 {
    public enum PortType
     {
-        Air,Sea,Land
+        Udara,Laut,Darat
     }
 
     public enum WeightType
     {
-        Weight,WeightVolume, Volume
+        Berat,DimensiBerat, Dimensi
     }
 
     public enum InvoiceStatus

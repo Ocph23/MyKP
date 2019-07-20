@@ -41,7 +41,7 @@ namespace DataAccesLayer.UnitOfWork
                     var result = db.Statuses.Where(O => O.STTId == id).FirstOrDefault();
                     if (result != null)
                         return result;
-                    throw new SystemException("Data Agent Tidak Ditemukan");
+                    throw new SystemException("Data Tidak Ditemukan");
 
 
                 }
@@ -59,7 +59,7 @@ namespace DataAccesLayer.UnitOfWork
             {
                 try
                 {
-                    var saved = db.Statuses.Update(O => new { O.CourierId,O.RecieveCondition,O.RecieveDate,O.RecieverName,O.STTId},
+                    var saved = db.Statuses.Update(O => new { O.CourierId,O.RecieveCondition,O.RecieveDate,O.RecieverName,O.STTId,O.Sign},
                         value, O => O.Id == value.Id);
                     if (saved)
                         return value;

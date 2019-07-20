@@ -19,12 +19,14 @@ function MessageServices($rootScope) {
         if (title === undefined) {
             titleText === "Info";
         }
-
-        message(msg, titleText, "info");
-
         window.setTimeout(function () {
-            $("#MessageBox").click();
-        }, 3000);
+            Swal.fire({
+                type: 'info',
+                title: titleText,
+                text: msg,
+                footer: '<a href>trireksa</a>'
+            })
+        }, 500);
     };
 
     alertService.warning = function (msg, title) {
@@ -33,11 +35,14 @@ function MessageServices($rootScope) {
             titleText === "Warning";
         }
 
-        message(msg, titleText, "warning");
-
         window.setTimeout(function () {
-            $("#MessageBox").click();
-        }, 3000);
+            Swal.fire({
+                type: 'warning',
+                title: titleText,
+                text: msg,
+                footer: '<a href>trireksa</a>'
+            })
+        }, 500);
     };
 
     alertService.error = function (msg, title) {
@@ -45,31 +50,16 @@ function MessageServices($rootScope) {
         if (title === undefined) {
             titleText === "Error";
         }
-        message(msg, titleText, "error");
 
         window.setTimeout(function () {
-            $("#MessageBox").click();
-        }, 3000);
+            Swal.fire({
+                type: 'error',
+                title: titleText,
+                text: msg,
+                footer: '<a href>trireksa</a>'
+            })
+        }, 500);
     };
-
-    function message(text,title, type) {
-        $("body").append($("<div id='MessageBox' class='MessageBox'><div class='content'><h4> <b class='title'></b> </h4><p class='message'></p></div></div>"));
-        $('.title').text(title);
-        $('.message').text(text);
-        $('#MessageBox').css({ 'background': '#dc3545' }).fadeIn(600);
-
-        
-        if (type === "error")
-            $('#MessageBox').css({ 'background': '#dc3545' }).fadeIn(600);
-        if (type === "info")
-            $('#MessageBox').css({ 'background': ' #17a2b8' }).fadeIn(600);
-        if (type === "warning")
-            $('#MessageBox').css({ 'background': ' #f0ad4e' }).fadeIn(600);
-
-        $("#MessageBox").click(function () {
-            $(this).remove();
-        });
-    }
 
     return alertService;
 

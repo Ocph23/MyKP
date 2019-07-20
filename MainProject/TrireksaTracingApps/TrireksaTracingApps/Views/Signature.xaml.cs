@@ -25,7 +25,7 @@ namespace TrireksaTracingApps.Views
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            ResultValue = await signatureView.GetImageStreamAsync(SignatureImageFormat.Jpeg);
+            ResultValue = await signatureView.GetImageStreamAsync(SignatureImageFormat.Png);
           
             
             if (OnSign != null)

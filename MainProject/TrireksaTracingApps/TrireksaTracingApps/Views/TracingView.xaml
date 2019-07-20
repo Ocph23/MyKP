@@ -33,7 +33,7 @@
               
             </StackLayout>
         </ScrollView>
-        <Button Grid.Row="2" Margin="30" Text="Scan QR Code" HeightRequest="35" Clicked="Button_Clicked"
+        <Button Grid.Row="2" Margin="30" Text="Scan Barcode " HeightRequest="35" Clicked="Button_Clicked"
                         BackgroundColor="{StaticResource Primary}" TextColor="White" />
     </Grid>
-</ContentPage>
+</ContentPage>1111
