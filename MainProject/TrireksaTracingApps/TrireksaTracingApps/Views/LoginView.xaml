@@ -9,21 +9,21 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <ScrollView>
-                <StackLayout Margin="40">
+                <StackLayout Margin="20">
                     <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                        <Image Source="LOGO3rp.png" VerticalOptions="Center" HeightRequest="64" >
+                        <Image Source="LOGO3rp.png" VerticalOptions="Center" HeightRequest="40" >
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ShowIPCommand}"></TapGestureRecognizer>
                             </Image.GestureRecognizers>
                         </Image>
-                        <Label Text="INCOMING CARGO">
+                        <Label Text="INCOMING CARGO" >
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ShowIPCommand}"></TapGestureRecognizer>
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
-                    <StackLayout Spacing="25">
-                        <Label FontSize="Large" HorizontalOptions="Start" Text="LOGIN"></Label>
+                    <StackLayout Spacing="25" Margin="20">
+                        <Label FontSize="16" HorizontalOptions="Start" Text="LOGIN"></Label>
                         <Entry  Placeholder="User Name" Text="{Binding UserName}"/>
                         <Entry IsPassword="True" Placeholder="Password" Text="{Binding Password}"/>
                         <Label Text="Forgot Password">
