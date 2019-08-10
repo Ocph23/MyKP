@@ -37,16 +37,20 @@ namespace WebApp
                      "~/apps/admin/AdminController.js",
                      "~/apps/agent/agent.Route.js",
                      "~/apps/agent/agent.Service.js",
-                     "~/apps/agent/agent.Controller.js"
-
-
-
-
+                     "~/apps/agent/agent.Controller.js",
+                     "~/node_modules/sweetalert2/dist/sweetalert2.js"
                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/node_modules/sweetalert2/dist/sweetalert2.css",
                       "~/Content/site.css"));
+
+
+
+
+
+
         }
     }
 }

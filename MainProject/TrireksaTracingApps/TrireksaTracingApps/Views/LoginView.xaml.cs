@@ -68,8 +68,8 @@ namespace TrireksaTracingApps.Views
         {
             try
             {
-                UserName = "ocph23@gmail.com";
-                Password = "Sony@77";
+                //UserName = "ocph23@hotmail.com";
+                //Password = "Sony@77";
                 var result = await AuthServices.Login(UserName, Password);
                 if (result != null)
                 {

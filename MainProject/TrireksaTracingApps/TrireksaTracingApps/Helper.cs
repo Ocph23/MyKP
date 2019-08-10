@@ -11,8 +11,9 @@ namespace TrireksaTracingApps
 {
     public class Helper
     {
-        private static string _server = "http://192.168.1.11/";
-
+        //private static string _server = "http://192.168.1.2/";
+        private static string _server = " http://trireksaincoming.gear.host/";
+       
         public static async Task<AuthenticationToken> GetToken()
         {
             var app = ((App)App.Current);

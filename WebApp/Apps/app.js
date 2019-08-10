@@ -1,7 +1,7 @@
 ﻿angular.module("app", [
     "chart.js",
     'ngRoute',
-    'ui.router',
+    'ui.router', 'angular-barcode',
     'monospaced.qrcode',
     'admin.routes',
     'admin.services',

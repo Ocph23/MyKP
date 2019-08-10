@@ -1,73 +1,78 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TrireksaTracingApps.Views.TrackingDetail" Title="Detail Pengiriman">
+             x:Class="TrireksaTracingApps.Views.TrackingDetail" Title="Detail">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  Text="Simpan" Command="{Binding SaveCommand}"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="35*"/>
-                <RowDefinition Height="40*"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <ScrollView>
-                <StackLayout Margin="20">
-                    <StackLayout Orientation="Horizontal">
-                        <Label WidthRequest="100" Text="STT/AWB"/>
-                        <Label Text="{Binding Model.STT}"/>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <ScrollView>
+                    <StackLayout Margin="20">
+                        <StackLayout Orientation="Horizontal">
+                            <Label WidthRequest="100" Text="STT/AWB"/>
+                            <Label Text="{Binding Model.STT}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label WidthRequest="100" Text="Agen"/>
+                            <Label Text="{Binding Model.AgentName}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label WidthRequest="100" Text="Pengirim"/>
+                            <Label Text="{Binding Model.Shiper}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label WidthRequest="100" Text=""/>
+                            <Label Text="{Binding Model.ShiperAddress}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label WidthRequest="100" Text="Penerima"/>
+                            <Label Text="{Binding Model.Reciever}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label WidthRequest="100" Text=""/>
+                            <Label Text="{Binding Model.RecieverAddress}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label WidthRequest="100" Text="Pcs"/>
+                            <Label Text="{Binding Model.Pcs}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label WidthRequest="100" Text="Berat"/>
+                            <Label Text="{Binding Model.WeightValue,StringFormat='{0} Kg'}"/>
+                        </StackLayout>
                     </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label WidthRequest="100" Text="Agen"/>
-                        <Label Text="{Binding Model.AgentName}"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label WidthRequest="100" Text="Pengirim"/>
-                        <Label Text="{Binding Model.Shiper}"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label WidthRequest="100" Text=""/>
-                        <Label Text="{Binding Model.ShiperAddress}"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label WidthRequest="100" Text="Penerima"/>
-                        <Label Text="{Binding Model.Reciever}"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label WidthRequest="100" Text=""/>
-                        <Label Text="{Binding Model.RecieverAddress}"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label WidthRequest="100" Text="Pcs"/>
-                        <Label Text="{Binding Model.Pcs}"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label WidthRequest="100" Text="Berat"/>
-                        <Label Text="{Binding Model.WeightValue,StringFormat='{0} Kg'}"/>
-                    </StackLayout>
-                </StackLayout>
-            </ScrollView>
-            <StackLayout Margin="20" Grid.Row="1">
-                <Entry Text="{Binding Model.Status.RecieverName}" HorizontalOptions="FillAndExpand" Placeholder="Diterima Oleh"></Entry>
-                <Entry Text="{Binding Model.Status.RecieveCondition}" HeightRequest="100" HorizontalOptions="FillAndExpand" Placeholder="Keterangan"></Entry>
-                <StackLayout>
-                    <Label Text="Tanda Tangan">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SignCommand}"></TapGestureRecognizer>
-                        </Label.GestureRecognizers>
-                    </Label>
-                    <StackLayout WidthRequest="200" HeightRequest="100" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"
+                </ScrollView>
+                <StackLayout Margin="20" Grid.Row="1">
+                    <Entry Text="{Binding Model.Status.RecieverName}" HorizontalOptions="FillAndExpand" Placeholder="Diterima Oleh"></Entry>
+                    <Entry Text="{Binding Model.Status.RecieveCondition}" HeightRequest="100" HorizontalOptions="FillAndExpand" Placeholder="Keterangan"></Entry>
+                    <StackLayout>
+                        <Label Text="Tanda Tangan">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SignCommand}"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <StackLayout  HeightRequest="250"  VerticalOptions="StartAndExpand"
                                  BackgroundColor="WhiteSmoke" Opacity="0.9">
-                        <Image Source="{Binding Sign}" Aspect="AspectFit" >
-                            <Image.GestureRecognizers>
+                            <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding SignCommand}"/>
-                            </Image.GestureRecognizers>
-                        </Image>
+                            </StackLayout.GestureRecognizers>
+                            <Image Margin="3" Source="{Binding Sign}" Aspect="Fill" >
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SignCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+
                     </StackLayout>
-                   
                 </StackLayout>
-            </StackLayout>
-            <StackLayout Margin="5" Grid.Row="2">
-                <Button HorizontalOptions="End" WidthRequest="100" Text="Simpan" Command="{Binding SaveCommand}"/>
-            </StackLayout>
-        </Grid>
+              
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

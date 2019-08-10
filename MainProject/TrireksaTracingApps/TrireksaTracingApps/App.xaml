@@ -5,10 +5,14 @@
     <Application.Resources>
        <StyleSheet Source="Assets/styles.css"/>
         <ResourceDictionary>
-            <Color x:Key="NavigationPrimary">#1F271B</Color>
+            <Color x:Key="NavigationPrimary">#00BBF9</Color>
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
                 <Setter Property="BarTextColor" Value="White" />
+            </Style>
+
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="White" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

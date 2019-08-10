@@ -1,11 +1,11 @@
 ﻿^contentpage {
-    background-color: #1F271B;
+    background-color: #00BBF9;
     border: 2 solid red;
     border-radius: 5;
 }
 
 ^button {
-    background-color: #198C7F;
+    background-color: #9B5DE5;
     height: 50;
     border-radius: 5;
     color:white;
@@ -14,11 +14,6 @@
 
 ^label{
     color:white;
-}
-
-
-^Entry {
-    color: white;
 }
 
 

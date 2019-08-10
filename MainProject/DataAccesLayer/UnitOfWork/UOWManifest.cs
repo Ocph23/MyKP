@@ -20,8 +20,10 @@ namespace DataAccesLayer.UnitOfWork
                     var result = from a in db.Manifests.Where(O => O.AgentId == agentId)
                                  join b in db.Agents.Select() on a.AgentId equals b.AgentId
                                  join c in db.AgentAdmins.Select() on a.AgentAdminId equals c.Id
-                                 select new manifest { AgentAdminId=a.AgentAdminId, AgentId=a.AgentId, CreateDate=a.CreateDate, DetailInformation=a.DetailInformation,
-                                  Id=a.Id, Number=a.Number, Package=a.Package, PortType=a.PortType, RecieveOnPort=a.RecieveOnPort, SendedDate=a.SendedDate,User=c, Agent=b};
+                                 select new manifest { AgentAdminId=a.AgentAdminId, AgentId=a.AgentId,
+                                     CreateDate =a.CreateDate, DetailInformation=a.DetailInformation,
+                                  Id=a.Id, Number=a.Number, Package=a.Package, PortType=a.PortType,
+                                     RecieveOnPort =a.RecieveOnPort, SendedDate=a.SendedDate,User=c, Agent=b};
                     
                     return result.ToList();
                 }

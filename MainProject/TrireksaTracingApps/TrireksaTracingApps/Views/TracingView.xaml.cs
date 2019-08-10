@@ -34,7 +34,9 @@ namespace TrireksaTracingApps.Views
         {
             var option = new ZXing.Mobile.MobileBarcodeScanningOptions();
             option.AutoRotate = true;
-            option.PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.QR_CODE, ZXing.BarcodeFormat.CODABAR , ZXing.BarcodeFormat.EAN_13, ZXing.BarcodeFormat.DATA_MATRIX};
+            option.PossibleFormats = new List<ZXing.BarcodeFormat>() {
+                 ZXing.BarcodeFormat.EAN_8, ZXing.BarcodeFormat.EAN_13, ZXing.BarcodeFormat.CODE_128
+            };
             var scanPage = new ZXingScannerPage(option);
             scanPage.HeightRequest = 300;
             scanPage.WidthRequest = 200;
@@ -56,7 +58,7 @@ namespace TrireksaTracingApps.Views
                     try
                     {
                         var data = result.Text.Split(';');
-                        if (data.Length > 1)
+                        if (data.Length >0)
                         {
                             var context = BindingContext as TracingViewModel;
                             var resultData =await context.Find(data[0], data[1]);
@@ -130,10 +132,6 @@ namespace TrireksaTracingApps.Views
             var data = await ManifestServices.FindSTT(STT);
             if (data != null && OnSearch != null)
                 OnSearch(data, new EventArgs());
-            else
-            {
-                Helper.ShowMessageError("Data Tidak Ditemukan");
-            }
         }
 
         internal async Task<stt> Find(string v1, string v2)

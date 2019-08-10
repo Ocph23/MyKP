@@ -57,9 +57,9 @@ function AgentManifestController($scope, AuthServices, ManifestServices, AgentHo
 function AgentCreateManifestController($scope, AuthServices, ManifestServices, AgentHomeService,CityServices,$stateParams) {
     AuthServices.userRoleIs("Agent");
     $scope.Saved = false;
-    $scope.WeightTypes = ["Weight", "WeightVolume", "Volume"];
-    $scope.Ports = ["Air", "Sea"];
-    $scope.ShippingMode = ["Land","Air", "Sea"];
+    $scope.WeightTypes = ["Berat", "Dimensi"];
+    $scope.Ports = ["Udara", "Laut"];
+    $scope.ShippingMode = ["Darat","Udara", "Laut"];
     $scope.Agent = AgentHomeService.getAgent();
     
     $scope.model = $stateParams.data;
@@ -234,7 +234,7 @@ function AgentInvoiceController($scope, AgentInvoiceServices, AgentHomeService) 
 
 function AgentPriceController($scope, PriceServices, AgentHomeService, MessageServices, AuthServices) {
     $scope.Agent = AgentHomeService.getAgent();
-    $scope.Ports = ["Sea", "Air", "Land"];
+    $scope.Ports = ["Darat", "Udara", "Laut"];
     PriceServices.get($scope.Agent.AgentId).then(function (response) {
         $scope.Datas = response;
     }, function (error) {
