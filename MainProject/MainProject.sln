@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29020.237
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "..\WebApp\WebApp.csproj", "{DDF14DB3-7E62-4354-ABA9-EBE8E9D9C457}"
 EndProject
@@ -9,14 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrireksaTracingApps.Android
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrireksaTracingApps", "TrireksaTracingApps\TrireksaTracingApps\TrireksaTracingApps.csproj", "{04BC5EB8-ECA4-406D-91EF-C5BE9AC6D64F}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Ocph.DAL.Source", "..\..\..\DAL\OcphDAL\Ocph.DAL\Ocph.DAL.Source.shproj", "{FE4BE3BE-C5CF-4E3F-B710-E5FFF9D4D172}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccesLayer", "DataAccesLayer\DataAccesLayer.csproj", "{ADBC34C9-C64A-4FD6-8F1E-9162648A4D6C}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Ocph.DAL.Source", "..\..\OcphDAL\Ocph.DAL\Ocph.DAL.Source.shproj", "{FE4BE3BE-C5CF-4E3F-B710-E5FFF9D4D172}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		..\..\..\DAL\OcphDAL\Ocph.DAL\Ocph.DAL.projitems*{adbc34c9-c64a-4fd6-8f1e-9162648a4d6c}*SharedItemsImports = 4
-		..\..\..\DAL\OcphDAL\Ocph.DAL\Ocph.DAL.projitems*{fe4be3be-c5cf-4e3f-b710-e5fff9d4d172}*SharedItemsImports = 13
+		..\..\OcphDAL\Ocph.DAL\Ocph.DAL.projitems*{adbc34c9-c64a-4fd6-8f1e-9162648a4d6c}*SharedItemsImports = 4
+		..\..\OcphDAL\Ocph.DAL\Ocph.DAL.projitems*{fe4be3be-c5cf-4e3f-b710-e5fff9d4d172}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

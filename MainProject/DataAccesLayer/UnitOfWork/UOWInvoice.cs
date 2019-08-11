@@ -114,6 +114,7 @@ namespace DataAccesLayer.UnitOfWork
             {
                 try
                 {
+                    IEnumerable<price> prices = db.Prices.Where(x => x.AgentId == id);
                     var command = db.CreateCommand();
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.CommandText = "SttNotPaid";
@@ -122,13 +123,18 @@ namespace DataAccesLayer.UnitOfWork
                   var datas=  Ocph.DAL.Mapping.MySql.MappingProperties<stt>.MappingTable(result);
 
                     var list = new List<invoiceitem>();
+         
+
                     if (datas != null)
                     {
                         foreach(var data in datas)
                         {
                             if(data.Id>0)
                             {
-                                var item = new invoiceitem { STT = data, STTId = data.Id , Price=data.PriceValue};
+                                var dataprice = prices.Where(x => x.CityId == data.CityId && x.PortType==data.ShippingBy).FirstOrDefault();
+
+                                var item = new invoiceitem { STT = data, STTId = data.Id};
+                                item.Price = dataprice == null ? 0 : dataprice.PriceValue;
                                 list.Add(item);
                             }
                          

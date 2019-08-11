@@ -88,7 +88,20 @@ namespace DataAccesLayer.UnitOfWork
 
         public bool Delete(int id)
         {
-            throw new SystemException("Data Tidak Dizinkan Untuk Dihapus");
+            using (var db = new OcphDbContext())
+            {
+                try
+                {
+                    var deleted = db.Agents.Delete(O=>O.AgentId == id);
+                    if (deleted)
+                        return deleted;
+                    throw new SystemException("Data Agent Tidak Berhasil Dihapus");
+                }
+                catch (Exception ex)
+                {
+                    throw new SystemException(ex.Message);
+                }
+            }
         }
 
         public object AgentUsers(int agentId)

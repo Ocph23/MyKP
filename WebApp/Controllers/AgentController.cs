@@ -51,13 +51,28 @@ namespace WebApp.Controllers
             }
         }
 
+        private bool IsValid(agent data)
+        {
 
+            try
+            {
+                if (string.IsNullOrEmpty(data.Code) || string.IsNullOrEmpty(data.Name) || string.IsNullOrEmpty(data.NPWP) || string.IsNullOrEmpty(data.Telepon) ||
+                string.IsNullOrEmpty(data.Handphone) || string.IsNullOrEmpty(data.Address))
+                    return false;
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw new  SystemException("Silahkan Lengkapi Data Agen");
+            }
+        }
         // POST: api/Agent
         public IHttpActionResult Post([FromBody]agent value)
         {
             try
             {
-                if (value == null)
+                if (value == null || !IsValid(value))
                     throw new SystemException("Periksa Kembali Data Anda");
                 return Ok(agentContext.post(value));
             }
@@ -73,6 +88,8 @@ namespace WebApp.Controllers
         {
             try
             {
+                if(value==null || !IsValid(value))
+                    throw new SystemException("Periksa Kembali Data Anda");
                 return Ok(agentContext.Update(value));
             }
             catch (Exception ex)

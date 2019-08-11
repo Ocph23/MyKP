@@ -43,6 +43,10 @@ namespace DataAccesLayer.UnitOfWork
             {
                 try
                 {
+                    var dataExist = db.Prices.Where(x => x.AgentId == value.AgentId && x.PortType == value.PortType).FirstOrDefault();
+                    if(dataExist!=null)
+                        throw new SystemException($"Data Tarif ke {value.City.Name} via {value.PortType} Sudah ada");
+
                     value.Id = db.Prices.InsertAndGetLastID(value);
                     if (value.Id > 0)
                         return value;
@@ -103,7 +107,7 @@ namespace DataAccesLayer.UnitOfWork
                     var saved = db.Prices.Delete(O => O.Id == id);
                     if (saved)
                         return true;
-                    throw new SystemException("Data Agent Tidak Berhasil Diubah");
+                    throw new SystemException("Data Tidak Berhasil Dihapus");
                 }
                 catch (Exception ex)
                 {

@@ -183,6 +183,15 @@ namespace WebApp.Controllers
             }
         }
 
+        private bool ValidateData(petugas data)
+        {
+
+            if (string.IsNullOrEmpty(data.Role))
+                return false;
+
+            return true;
+        }
+
 
         [HttpPost]
         [Route("api/UserProfile/Admin")]
@@ -193,6 +202,11 @@ namespace WebApp.Controllers
             var userModel = new Models.ApplicationUser { Email = item.Email, UserName = item.Email };
             try
             {
+
+                if (item==null || !ValidateData(item))
+                    throw new SystemException("Lengkapi Data Anda");
+
+
                 Random rand = new Random();
                 var password = Helper.GetRandomAlphanumericString(6) + "3#";
                 result = await UserManager.CreateAsync(userModel, password);

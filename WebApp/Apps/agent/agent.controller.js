@@ -54,7 +54,7 @@ function AgentManifestController($scope, AuthServices, ManifestServices, AgentHo
     }
 }
 
-function AgentCreateManifestController($scope, AuthServices, ManifestServices, AgentHomeService,CityServices,$stateParams) {
+function AgentCreateManifestController($scope, MessageServices, AuthServices, ManifestServices, AgentHomeService,CityServices,$stateParams) {
     AuthServices.userRoleIs("Agent");
     $scope.Saved = false;
     $scope.WeightTypes = ["Berat", "Dimensi"];
@@ -107,21 +107,30 @@ function AgentCreateManifestController($scope, AuthServices, ManifestServices, A
 
 
     $scope.AddNewItem = function (item) {
-        if (item.Id === undefined) {
-            item.ManifestId = $scope.model.Id;
-            item.CityId = item.City.Id;
-            ManifestServices.addNewItem(item.ManifestId, item).then(function (response) {
-                $scope.model.Items.push(response.data);
-                $scope.data = {};
-            });
-          
-        } else {
-            item.CityId = item.City.Id;
-            ManifestServices.updateItem(item.ManifestId, item).then(function (data) {
-                $scope.data = {};
-            });
-        }
+        try {
 
+            if (item.City == undefined)
+                throw "Silahkan pilih kota tujuan";
+            if (item.ShippingBy == undefined)
+                throw "Pilih Jenis Pelabuhan ";
+            if (item.Id === undefined) {
+                item.ManifestId = $scope.model.Id;
+                item.CityId = item.City.Id;
+                ManifestServices.addNewItem(item.ManifestId, item).then(function (response) {
+                    $scope.model.Items.push(response.data);
+                    $scope.data = {};
+                });
+
+            } else {
+                item.CityId = item.City.Id;
+                ManifestServices.updateItem(item.ManifestId, item).then(function (data) {
+                    $scope.data = {};
+                });
+            }
+
+        } catch (e) {
+            MessageServices.error(e);
+        }
     };
 
 

@@ -216,12 +216,12 @@ function AdminPriceManageController($scope, $stateParams, $state, MessageService
     else
         $scope.Agent = data;
 
-    $scope.SortBy = "Air";
+    $scope.SortBy = "Udara";
     $scope.Selected = {};
     $scope.PortType;
     $scope.model = {};
     $scope.Cities = [];
-    $scope.Ports = ["Sea", "Air","Land"];
+    $scope.Ports = ["Udara", "Laut", "Darat"];
     PriceServices.get($scope.Agent.AgentId).then(function (response) {
         $scope.Datas = response;
         CityServices.get().then(function (response) {
@@ -234,17 +234,25 @@ function AdminPriceManageController($scope, $stateParams, $state, MessageService
     });
 
     $scope.SaveAgent = function (data) {
-        data.CityId = data.City.Id;
+        try {
+            if (data.City == undefined || data.PortType == undefined || data.PriceValue == undefined)
+                throw "Lengkapi Data Anda";
 
-        if (data.Id === undefined) {
-            data.AgentId = $scope.Agent.AgentId;
-            PriceServices.post(data).then(function (response) {
-                MessageServices.info("Success");
-            });
-        } else {
-            PriceServices.update(data).then(function (response) {
-                MessageServices.info("Success");
-            });
+            data.CityId = data.City.Id;
+
+            if (data.Id === undefined) {
+                data.AgentId = $scope.Agent.AgentId;
+                PriceServices.post(data).then(function (response) {
+                    MessageServices.info("Success");
+                });
+            } else {
+                PriceServices.update(data).then(function (response) {
+                    MessageServices.info("Success");
+                });
+            }
+
+        } catch (e) {
+            MessageServices.error(e);
         }
     };
     $scope.SelectedItem = function (item) {
@@ -509,20 +517,27 @@ function AdminCreateInvoiceController($scope, AdminService, AuthServices, Invoic
 
 
     $scope.SaveChange = function (data) {
-
-        data.AgentId = data.Agent.AgentId;
-        data.PetugasId = $scope.User.Id;
-        if (data.Id === undefined) {
+        try {
+            if (data.Agent == undefined)
+                throw "Pilih Agen !";
+            if ($scope.Sources == undefined || $scope.Sources.length <= 0)
+                throw "Tidak Terdapat Data STT yang akan ditagihkan";
             data.AgentId = data.Agent.AgentId;
-            InvoiceServices.post(data).then(function (response) {
-                $scope.Saved = true;
-                InvoiceServices.getItems(data.AgentId).then(function (response) {
-                    $scope.Sources=JSON.parse(response);
+            data.PetugasId = $scope.User.Id;
+            if (data.Id === undefined) {
+                data.AgentId = data.Agent.AgentId;
+                InvoiceServices.post(data).then(function (response) {
+                    $scope.Saved = true;
+                    InvoiceServices.getItems(data.AgentId).then(function (response) {
+                        $scope.Sources = JSON.parse(response);
+                    });
                 });
-            });
-        } else {
-            InvoiceServices.update(data).then(function (response) {
-            });
+            } else {
+                InvoiceServices.update(data).then(function (response) {
+                });
+            }
+        } catch (e) {
+            MessageServices.error(e);
         }
     };
 
