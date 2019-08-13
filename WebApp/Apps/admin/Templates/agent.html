@@ -47,7 +47,7 @@
                             <a ng-if="AuthServices.roleIs('Admin')" ng-click="SelectedItem(item)" data-toggle="modal" data-target="#exampleModalCenter" href=""><i class="fas fa-trash    text-danger"></i></a>
                             <a ng-if="AuthServices.roleIs('Admin')" ng-click="EditItem(item)" data-target="#modal-container-825517" role="button" data-toggle="modal" href=""><i class="fas fa-edit   text-info"></i></a>
                             <a ng-if="AuthServices.roleIs('Admin')" ui-sref="usermanage({data:item})"><i class="fas fa-users"></i></a>
-                            <a ng-if="!AuthServices.roleIs('Courier')" ui-sref="prices({data:item})" ><i class="fas fa-coins    text-warning "></i></a>
+                            <a ng-if="AuthServices.roleIs('Accounting')" ui-sref="prices({data:item})" ><i class="fas fa-coins    text-warning "></i></a>
                         </td>
                     </tr>
                 </tbody>

@@ -205,6 +205,7 @@
     <Compile Include="Controllers\AgentDashboarController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
+    <Compile Include="Controllers\PenjualanController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -233,8 +234,10 @@
     <Content Include="Apps\admin\Templates\find.html" />
     <Content Include="Apps\admin\Templates\invoice.html" />
     <Content Include="Apps\admin\Templates\manageuser.html" />
+    <Content Include="Apps\admin\Templates\penjualan.html" />
     <Content Include="Apps\admin\Templates\petugas.html" />
     <Content Include="Apps\admin\Templates\prices.html" />
+    <Content Include="Apps\admin\Templates\printpenjualan.html" />
     <Content Include="Apps\admin\Templates\printinvoice.html" />
     <Content Include="Apps\agent\templates\agentdashboard.html" />
     <Content Include="Apps\agent\templates\agentprice.html" />

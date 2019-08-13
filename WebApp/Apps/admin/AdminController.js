@@ -10,9 +10,51 @@
     .controller('AdminInvoiceController', AdminInvoiceController)
     .controller('AdminCreateInvoiceController', AdminCreateInvoiceController)
     .controller('AdminPrintInvoiceController', AdminPrintInvoiceController)
+    .controller('AdminPrintPenjualanController', AdminPrintPenjualanController)
   
     ;
 
+
+
+function AdminPrintPenjualanController($scope, $state, $http, MessageServices, AuthServices) {
+    $scope.Datas = [];
+    $scope.Initalization = false;
+    $scope.Init = function () {
+        var date = new Date();
+        $scope.Dari = new Date(date.getFullYear(), date.getMonth(), 1);
+        $scope.Sampai = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        getData();
+    }
+
+    $scope.OnDateChange = function () {
+        if ($scope.Initalization) {
+            getData();
+        } else
+            $scope.Initalization = true;
+    }
+
+    $scope.getTotal = function () {
+        var total = 0;
+        $scope.Datas.forEach(x => {
+            total += x.Total;
+        });
+        return total;
+    }
+
+    function getData() {
+        $http({
+            method: 'Get',
+            url: 'api/penjualan/byadmin?dari=' + $scope.Dari.toLocaleDateString("fr-CA") +
+                "&&sampai=" + $scope.Sampai.toLocaleDateString("fr-CA")
+        }).then(function (response) {
+            $scope.Datas = response.data;
+            $scope.Initalization = true;
+        }, function (error) {
+            MessageServices.warning(error.data.Message);
+        });
+    }
+
+}
 
 function AdminUserController($scope, AuthServices,$state) {
     //var data = AuthServices.getAgentProfile();
@@ -216,12 +258,12 @@ function AdminPriceManageController($scope, $stateParams, $state, MessageService
     else
         $scope.Agent = data;
 
-    $scope.SortBy = "Udara";
+    $scope.SortBy = "";
     $scope.Selected = {};
     $scope.PortType;
     $scope.model = {};
     $scope.Cities = [];
-    $scope.Ports = ["Udara", "Laut", "Darat"];
+    $scope.Ports = ["Udara", "Laut", "Darat",""];
     PriceServices.get($scope.Agent.AgentId).then(function (response) {
         $scope.Datas = response;
         CityServices.get().then(function (response) {

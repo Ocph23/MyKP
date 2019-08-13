@@ -1,0 +1,93 @@
+﻿<div class="row" style="padding:15px" ng-init="Init()">
+    <div class="card w-100">
+        <div class="card-header">
+            <h4 class="print-only">Laporan Penjualan</h4>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="navbar-toggler-icon"></span>
+                </button> <a class="navbar-brand">LAPORAN PENJUALAN</a>
+                          <ul class="navbar-nav ml-md-auto">
+                              <li class="nav-item active">
+                                  <a class="nav-link" href="" ng-click="AuthServices.print()"><i class="fas fa-print fa-2x  text-info"></i> <span class="sr-only">(current)</span></a>
+                              </li>
+                          </ul>
+            </nav>
+        </div>
+        <div class="card-body">
+            <div style="margin:10px;" class="no-print">
+                <div class="form-inline">
+                    <label>
+                        Dari Tanggal
+                    </label>
+                    <input type="date" class="form-control" style="max-width:200px" ng-model="Dari" ng-change="OnDateChange()" />
+                </div>
+                <div class="form-inline">
+                    <label>
+                        Sampai Tanggal
+                    </label>
+                    <input type="date" class="form-control" style="max-width:200px" ng-model="Sampai" ng-change="OnDateChange()" />
+                </div>
+
+            </div>
+            <div class="print-only">
+                <div class="form-inline col-md-12" style="justify-content:flex-end;margin:10px">
+                    <label>
+                        Tanggal: {{ Dari | date: 'dd/MM/yyyy'}}
+                    </label>
+                    <label>
+                        - {{ Sampai | date: 'dd/MM/yyyy'}}
+                    </label>
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tanggal</th>
+                        <th scope="col">Agen</th>
+                        <th scope="col">STT</th>
+                        <th scope="col">Pengirim</th>
+                        <th scope="col">Penerima</th>
+                        <th scope="col">Pcs</th>
+                        <th scope="col">Berat</th>
+                        <th scope="col">Tarif</th>
+                        <th scope="col">Total</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in Datas">
+                        <th scope="row">{{$index+1}}</th>
+                        <td>{{item.Tanggal | date :  "dd MMMM y" }}</td>
+                        <td>{{item.Agen}}</td>
+                        <td>{{item.STT}}</td>
+                        <td>{{item.Pengirim}}</td>
+                        <td>{{item.Penerima}}</td>
+                        <td>{{item.Pcs}}</td>
+                        <td>{{item.Berat|number}}</td>
+                        <td>{{item.Tarif|number}}</td>
+                        <td>{{item.Total|number}}</td>
+                    </tr>
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="9">Grand Total</td>
+                        <td>{{getTotal()|number}}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+  @media (min-width: 576px)
+  {
+.form-inline label {
+    justify-content: flex-start;
+    width:150px;
+}
+  }
+
+</style>

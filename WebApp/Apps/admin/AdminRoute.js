@@ -92,6 +92,21 @@ angular.module('admin.routes', [])
                 controller: 'AdminPrintInvoiceController'
             })
 
+            .state('penjualan', {
+                url: '/penjualan',
+                parent: 'admin',
+                templateUrl: '/apps/admin/templates/penjualan.html',
+                controller: 'AdminPrintPenjualanController'
+            })
+
+            .state('printpenjualan', {
+                url: '/printpenjualan',
+                params: {
+                    data: null, state: null
+                },
+                templateUrl: '/apps/admin/templates/printpenjualan.html',
+                controller: 'AdminPrintPenjualanController'
+            })
 
             ;
         
